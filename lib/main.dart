@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_travel/iot_asset_management/presentation/animated_marker_map.dart';
 
 void main() {
   runApp(const MainApp());
@@ -12,7 +13,7 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Text('Welcome to life-travel!'),
+          child: AnimatedMarkerMap(),
         ),
       ),
     );
