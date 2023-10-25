@@ -97,24 +97,19 @@ class MyLocationMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 50,
       width: 50,
-      decoration: BoxDecoration(
-        color: MARKER_COLOR,
-        borderRadius: BorderRadius.circular(50),
-        border: Border.all(
-          color: Colors.white,
-          width: 5,
-        ),
-      ),
       child: role == 'GUIDE'
-          ? Icon(
-              Icons.tour,
-              size: 30,
-              color: Colors.teal[700],
+          ? Container(
+              decoration: const BoxDecoration(shape: BoxShape.circle),
+              child: Icon(
+                Icons.tour,
+                size: 30,
+                color: Colors.teal[700],
+              ),
             )
-          : role == 'Tourist'
+          : role == 'TOURIST'
               ? Container(
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
