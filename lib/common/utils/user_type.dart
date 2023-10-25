@@ -1,0 +1,4 @@
+enum UserType {
+  guide,
+  tourist,
+}

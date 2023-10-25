@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:life_travel/common/utils/user_type.dart';
+import 'package:life_travel/common/widgets/life_travel_app_bar.dart';
 import 'package:life_travel/iot_asset_management/infraestructure/models/map_marker.dart';
 
 const MAP_BOX_TOKEN =
@@ -24,7 +28,7 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
     return touristSample.map((touristItem) {
       return Marker(
         point: touristItem.location,
-        child: const MyLocationMarker(role: 'TOURIST'),
+        child: const MyLocationMarker(role: UserType.tourist),
       );
     }).toList();
   }
@@ -33,15 +37,7 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
   Widget build(BuildContext context) {
     final _markers = _buildMarkers();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tour interactive map'),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.filter),
-          ),
-        ],
-      ),
+      appBar: const LifeTravelAppBar(),
       body: Stack(children: [
         FlutterMap(
           options: const MapOptions(
@@ -65,7 +61,7 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
                 Marker(
                     point: _sampleLocation,
                     child: MyLocationMarker(
-                      role: 'GUIDE',
+                      role: UserType.guide,
                     )),
               ],
             )
@@ -93,23 +89,19 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
 class MyLocationMarker extends StatelessWidget {
   const MyLocationMarker({Key? key, required this.role}) : super(key: key);
 
-  final String role;
+  final UserType role;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 50,
       width: 50,
-      child: role == 'GUIDE'
+      child: role == UserType.guide
           ? Container(
               decoration: const BoxDecoration(shape: BoxShape.circle),
-              child: Icon(
-                Icons.tour,
-                size: 30,
-                color: Colors.teal[700],
-              ),
+              child: const Icon(Icons.tour, size: 30, color: Colors.amber),
             )
-          : role == 'TOURIST'
+          : role == UserType.tourist
               ? Container(
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
