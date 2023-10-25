@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:life_travel/common/utils/routes.dart';
+import 'package:life_travel/common/utils/user_type.dart';
+import 'package:life_travel/common/widgets/bottom_nav.dart';
 import 'package:life_travel/iot_asset_management/presentation/animated_marker_map.dart';
 import 'package:life_travel/identity_access_management/presentation/identity_access.dart';
 
@@ -11,10 +14,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: SignInScreen(),
+          child: BottomNav(
+            initialIndex: 0,
+            onTabTapped: (int i) {},
+            role: UserType.guide.toString(),
+          ),
         ),
       ),
     );
