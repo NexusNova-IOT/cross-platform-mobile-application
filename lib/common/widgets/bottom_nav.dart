@@ -3,15 +3,10 @@ import 'package:life_travel/common/utils/routes.dart';
 import 'package:life_travel/common/utils/user_type.dart';
 
 class BottomNav extends StatefulWidget {
-  final Function(int) onTabTapped;
-  final int initialIndex;
+  final Function currentIndex;
   final String role;
 
-  const BottomNav(
-      {Key? key,
-      required this.onTabTapped,
-      this.initialIndex = 0,
-      required this.role})
+  const BottomNav({Key? key, required this.currentIndex, required this.role})
       : super(key: key);
 
   @override
@@ -20,12 +15,6 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int currentIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    currentIndex = widget.initialIndex;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,26 +42,20 @@ class _BottomNavState extends State<BottomNav> {
       ];
     }
 
-    return Scaffold(
-      body: Routes(
-        index: currentIndex,
-        role: widget.role,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (int i) {
-          setState(() {
-            currentIndex = i;
-            widget.onTabTapped(i);
-          });
-        },
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        iconSize: 30,
-        type: BottomNavigationBarType.fixed,
-        items: bottomNavBarItems,
-      ),
+    return BottomNavigationBar(
+      currentIndex: currentIndex,
+      onTap: (int i) {
+        setState(() {
+          currentIndex = i;
+          widget.currentIndex(i);
+        });
+      },
+      backgroundColor: Colors.white,
+      selectedItemColor: Colors.black,
+      unselectedItemColor: Colors.grey,
+      iconSize: 30,
+      type: BottomNavigationBarType.fixed,
+      items: bottomNavBarItems,
     );
   }
 }

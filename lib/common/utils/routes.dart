@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:life_travel/common/utils/user_type.dart';
 import 'package:life_travel/iot_asset_management/presentation/animated_marker_map.dart';
+import 'package:life_travel/tour_packages/presentation/tour_packages.dart';
 
 class Routes extends StatelessWidget {
   final int index;
@@ -15,14 +16,14 @@ class Routes extends StatelessWidget {
 
     if (role == UserType.guide.toString()) {
       routes = [
-        const HomeRoute(),
+        const TourPackages(),
         const NotificationRoute(),
         const AnimatedMarkerMap(),
         const ProfileRoute(),
       ];
     } else if (role == UserType.tourist.toString()) {
       routes = [
-        const HomeRoute(),
+        const TourPackages(),
         const NotificationRoute(),
         const CalendarRoute(),
         const ProfileRoute(),
@@ -34,18 +35,6 @@ class Routes extends StatelessWidget {
     } else {
       return Container();
     }
-  }
-}
-
-class HomeRoute extends StatelessWidget {
-  const HomeRoute();
-
-  @override
-  Widget build(BuildContext context) {
-    // Implement your Home route UI here.
-    return Container(
-      child: Text("Home Route"),
-    );
   }
 }
 

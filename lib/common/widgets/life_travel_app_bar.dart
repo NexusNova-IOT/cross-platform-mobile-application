@@ -13,8 +13,8 @@ class LifeTravelAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: 100, // Personaliza el ancho
-            height: 100, // Personaliza la altura
+            width: 100,
+            height: 100,
             child: Image.asset('images/life-travel-banner.png'),
           )
         ],
