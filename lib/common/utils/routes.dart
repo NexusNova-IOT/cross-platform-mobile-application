@@ -3,6 +3,8 @@ import 'package:life_travel/common/utils/user_type.dart';
 import 'package:life_travel/iot_asset_management/presentation/animated_marker_map.dart';
 import 'package:life_travel/tour_packages/presentation/tour_packages.dart';
 
+import '../../notifications/presentation/notifications.dart';
+
 class Routes extends StatelessWidget {
   final int index;
   final String role;
@@ -17,14 +19,14 @@ class Routes extends StatelessWidget {
     if (role == UserType.guide.toString()) {
       routes = [
         const TourPackages(),
-        const NotificationRoute(),
+        Notifications(),
         const AnimatedMarkerMap(),
         const ProfileRoute(),
       ];
     } else if (role == UserType.tourist.toString()) {
       routes = [
         const TourPackages(),
-        const NotificationRoute(),
+        Notifications(),
         const CalendarRoute(),
         const ProfileRoute(),
       ];
@@ -35,18 +37,6 @@ class Routes extends StatelessWidget {
     } else {
       return Container();
     }
-  }
-}
-
-class NotificationRoute extends StatelessWidget {
-  const NotificationRoute();
-
-  @override
-  Widget build(BuildContext context) {
-    // Implement your Notification route UI here.
-    return Container(
-      child: Text("Notification Route"),
-    );
   }
 }
 
