@@ -13,7 +13,6 @@ class _TourItemState extends State<TourItem> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         children: [
-          CustomRectangle(),
           Card(
             color: const Color(0xFF161D2F),
             elevation: 0, // Sin sombra
