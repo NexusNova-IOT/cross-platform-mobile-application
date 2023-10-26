@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:life_travel/common/utils/user_type.dart';
-import 'package:life_travel/common/widgets/bottom_nav.dart';
+import 'CustomRectangle.dart';
+import 'ItineraryItem.dart';
 import 'package:life_travel/common/widgets/life_travel_app_bar.dart';
 
 class TourPackages extends StatefulWidget {
@@ -15,6 +15,31 @@ class TourPackagesState extends State<TourPackages> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const LifeTravelAppBar(),
+      body: Column(
+        children: [
+          SizedBox(height: 15.0),
+          Text(
+            'My Itinerary',
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              children: <Widget>[
+                ItineraryItem(),
+                SizedBox(height: 15.0),
+                ItineraryItem(),
+                SizedBox(height: 15.0),
+                ItineraryItem(),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
+
+
