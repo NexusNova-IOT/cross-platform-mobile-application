@@ -2,22 +2,22 @@ import 'package:latlong2/latlong.dart';
 import 'package:life_travel/iot_asset_management/infraestructure/models/map_marker.dart';
 
 final sampleLocations = [
-  const LatLng(-12.115052, -76.871530),
-  const LatLng(-12.115081, -76.871200),
-  const LatLng(-12.115561, -76.871645),
-  const LatLng(-12.115031, -76.871500),
-  const LatLng(-12.115031, -76.871500),
-  const LatLng(-12.115021, -76.871200),
-  const LatLng(-12.112091, -76.871700),
-  const LatLng(-12.111231, -76.871902),
-  const LatLng(-12.117031, -76.871100),
-  const LatLng(-12.115631, -76.871600),
+  const LatLng(-12.104049, -76.9612091),
+  const LatLng(-12.103044, -76.9622091),
+  const LatLng(-12.104042, -76.9632091),
+  const LatLng(-12.104043, -76.9652091),
+  const LatLng(-12.102046, -76.9662091),
+  const LatLng(-12.104547, -76.9672091),
+  const LatLng(-12.104048, -76.9682091),
+  const LatLng(-12.104711, -76.9692091),
+  const LatLng(-12.104029, -76.9618091),
+  const LatLng(-12.101539, -76.9659091),
 ];
 
 final touristSample = [
   MapMarker(
     image: 'assets/images/marker.png',
-    name: 'Marta Diaz',
+    name: 'Nicole Price',
     location: sampleLocations[0],
   ),
   MapMarker(

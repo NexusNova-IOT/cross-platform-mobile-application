@@ -10,19 +10,19 @@ class _ItineraryItemState extends State<ItineraryItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         children: [
           CustomRectangle(),
           Card(
-            color: Color(0xFF161D2F),
+            color: const Color(0xFF161D2F),
             elevation: 0, // Sin sombra
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.0),
             ),
             child: ListTile(
-              contentPadding: EdgeInsets.all(8),
-              title: Column(
+              contentPadding: const EdgeInsets.all(8),
+              title: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
@@ -54,9 +54,9 @@ class _ItineraryItemState extends State<ItineraryItem> {
                     height: 30,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
-                      color: Color(0xFF5A5A5A),
+                      color: const Color(0xFF5A5A5A),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Padding(
                         padding: EdgeInsets.only(left: 8),
                         child: Text(

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:life_travel/iot_asset_management/infraestructure/models/map_marker.dart';
 
-const _sampleLocation = LatLng(-12.115396, -76.871283);
-
 class TouristItemDetail extends StatelessWidget {
-  const TouristItemDetail({super.key, required this.touristItem});
+  const TouristItemDetail(
+      {super.key, required this.touristItem, required this.guideLocation});
 
   final MapMarker touristItem;
+  final LatLng guideLocation;
 
   @override
   Widget build(BuildContext context) {
-    final double bearing = touristItem.calculateBearing(_sampleLocation);
+    final double bearing = touristItem.calculateBearing(guideLocation);
 
     Icon arrowIcon;
     if (bearing >= 337.5 || bearing < 22.5) {
@@ -50,7 +50,7 @@ class TouristItemDetail extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    '${touristItem.getDistance(_sampleLocation)} meters away',
+                    '${touristItem.getDistance(guideLocation)} meters away',
                   ),
                   const SizedBox(height: 10),
                   arrowIcon,

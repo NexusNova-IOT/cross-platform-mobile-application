@@ -6,23 +6,23 @@ class CustomRectangle extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
-        side: BorderSide(
+        side: const BorderSide(
           color: Colors.black, // Color del borde
           width: 3.0, // Grosor del borde
         ),
       ),
       child: Container(
-        padding: EdgeInsets.all(0),
+        padding: const EdgeInsets.all(0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16), // Bordes circulares
-          color: Color(0xFFDDDDDD), // Color del rectángulo principal
+          color: const Color(0xFFDDDDDD), // Color del rectángulo principal
         ),
         child: Row(
           children: [
-            Row(
+            const Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 50.0, left: 25.0),
+                  padding: EdgeInsets.only(right: 50.0, left: 25.0),
                   child: Text(
                     '04:00 AM - 14:00 PM',
                     style: TextStyle(
@@ -35,7 +35,7 @@ class CustomRectangle extends StatelessWidget {
             Expanded(
               child: Container(
                 height: 35,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(16),
                     topLeft: Radius.circular(16),
@@ -44,7 +44,7 @@ class CustomRectangle extends StatelessWidget {
                   ),
                   color: Color(0xFF444444),
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     'In Progress',
                     style: TextStyle(
