@@ -37,7 +37,7 @@ class _UserProfileState extends State<UserProfile> {
                   margin: const EdgeInsets.only(left: 20.0, top: 10.0),
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
-                    radius: 20.0, // Radio del círculo
+                    radius: 20.0,
                     child: IconButton(
                       icon: const Icon(Icons.arrow_back),
                       onPressed: () {
@@ -47,7 +47,6 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                   ),
                 ),
-                // Imagen de perfil, nombre y rol
                 const Align(
                   alignment: Alignment.center,
                   child: Column(
@@ -59,7 +58,7 @@ class _UserProfileState extends State<UserProfile> {
                         // backgroundImage: AssetImage('assets/images/profile_image.png'),
                       ),
                       Text(
-                        "Nombre del Usuario",
+                        "Username",
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.white,
@@ -67,7 +66,7 @@ class _UserProfileState extends State<UserProfile> {
                         ),
                       ),
                       Text(
-                        "Tipo de Rol",
+                        "Role type",
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
@@ -107,7 +106,7 @@ class _UserProfileState extends State<UserProfile> {
                 const SizedBox(height: 10.0),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Apellido',
+                    labelText: 'First Name',
                     labelStyle: const TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -128,7 +127,7 @@ class _UserProfileState extends State<UserProfile> {
                 const SizedBox(height: 10.0),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Móvil',
+                    labelText: 'Phone',
                     labelStyle: const TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
