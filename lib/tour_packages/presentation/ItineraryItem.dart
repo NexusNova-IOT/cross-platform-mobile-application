@@ -75,7 +75,7 @@ class _ItineraryItemState extends State<ItineraryItem> {
                 height: 120,
                 child: Center(
                   child: Image.asset(
-                    'assets/images/profile_image.png',
+                    'images/profile_image.png',
                     width: 70,
                     height: 70,
                   ),

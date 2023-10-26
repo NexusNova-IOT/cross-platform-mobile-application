@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'CustomRectangle.dart';
 import 'ItineraryItem.dart';
 import 'package:life_travel/common/widgets/life_travel_app_bar.dart';
 
@@ -17,8 +16,8 @@ class TourPackagesState extends State<TourPackages> {
       appBar: const LifeTravelAppBar(),
       body: Column(
         children: [
-          SizedBox(height: 15.0),
-          Text(
+          const SizedBox(height: 15.0),
+          const Text(
             'My Itinerary',
             style: TextStyle(
               fontSize: 32,
@@ -29,9 +28,9 @@ class TourPackagesState extends State<TourPackages> {
             child: ListView(
               children: <Widget>[
                 ItineraryItem(),
-                SizedBox(height: 15.0),
+                const SizedBox(height: 15.0),
                 ItineraryItem(),
-                SizedBox(height: 15.0),
+                const SizedBox(height: 15.0),
                 ItineraryItem(),
               ],
             ),
@@ -41,5 +40,3 @@ class TourPackagesState extends State<TourPackages> {
     );
   }
 }
-
-
