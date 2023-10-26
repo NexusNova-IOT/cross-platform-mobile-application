@@ -19,7 +19,7 @@ class _NotificationsState extends State<Notifications> {
         children: [
           const SizedBox(height: 15.0),
           const Text(
-            'My Itinerary',
+            'Notifications',
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,
