@@ -5,6 +5,8 @@ import 'package:life_travel/tour_packages/presentation/tour_packages.dart';
 
 import '../../notifications/presentation/notifications.dart';
 
+import '../../profile_management/presentation/profile_management.dart';
+
 class Routes extends StatelessWidget {
   final int index;
   final String role;
@@ -21,14 +23,14 @@ class Routes extends StatelessWidget {
         const TourPackages(),
         Notifications(),
         const AnimatedMarkerMap(),
-        const ProfileRoute(),
+        UserProfile(),
       ];
     } else if (role == UserType.tourist.toString()) {
       routes = [
         const TourPackages(),
         Notifications(),
         const CalendarRoute(),
-        const ProfileRoute(),
+        UserProfile(),
       ];
     }
 
@@ -52,14 +54,3 @@ class CalendarRoute extends StatelessWidget {
   }
 }
 
-class ProfileRoute extends StatelessWidget {
-  const ProfileRoute();
-
-  @override
-  Widget build(BuildContext context) {
-    // Implement your Profile route UI here.
-    return Container(
-      child: Text("Profile Route"),
-    );
-  }
-}
