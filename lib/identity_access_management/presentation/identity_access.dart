@@ -1,3 +1,6 @@
+import 'dart:js_util';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:life_travel/common/utils/user_type.dart';
 import 'package:life_travel/common/widgets/base.dart';
@@ -13,7 +16,7 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isButtonEnabled = false;
   bool _isPasswordVisible = false;
@@ -39,7 +42,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   const SizedBox(height: 50),
                   TextFormField(
-                    controller: _usernameController,
+                    controller: _emailController,
                     decoration: const InputDecoration(
                       hintText: 'username',
                       prefixIcon: Icon(Icons.person),
@@ -101,13 +104,21 @@ class _SignInScreenState extends State<SignInScreen> {
                                 setState(() {
                                   _isButtonEnabled = true;
                                 }),
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const Base(),
-                                  ),
-                                )
+                                FirebaseAuth.instance
+                                    .signInWithEmailAndPassword(
+                                        email: _emailController.text,
+                                        password: _passwordController.text)
+                                    .then((value) {
+                                    print(value);                                    
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => const Base()));
+                                }).onError((error, stackTrace) {
+                                  print("Error ${error.toString()}");
+                                })
                               }
+                              
                           },
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
