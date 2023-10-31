@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'ItineraryItem.dart';
+import '../infraestructure/repositories/widgets/ItineraryItem.dart';
 import 'package:life_travel/common/widgets/life_travel_app_bar.dart';
 
 class TourPackages extends StatefulWidget {

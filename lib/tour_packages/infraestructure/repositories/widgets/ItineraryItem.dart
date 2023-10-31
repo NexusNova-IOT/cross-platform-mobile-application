@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:life_travel/tour_packages/presentation/CustomRectangle.dart';
+import 'package:life_travel/tour_packages/infraestructure/repositories/widgets/CustomRectangle.dart';
 
 class ItineraryItem extends StatefulWidget {
   @override
