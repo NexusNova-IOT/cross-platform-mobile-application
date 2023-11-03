@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:life_travel/common/config/local_storage.dart';
 import 'package:life_travel/common/widgets/base.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -40,7 +41,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 TextFormField(
                   controller: _emailController,
                   decoration: const InputDecoration(
-                    hintText: 'Correo electrónico',
+                    hintText: 'Email',
                     prefixIcon: Icon(Icons.person),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -50,7 +51,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Por favor, ingresa tu correo electrónico';
+                      return 'Please enter your email';
                     }
                     return null;
                   },
@@ -59,7 +60,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 TextFormField(
                   controller: _passwordController,
                   decoration: InputDecoration(
-                    hintText: 'Contraseña',
+                    hintText: 'Password',
                     prefixIcon: const Icon(Icons.lock),
                     suffixIcon: IconButton(
                       icon: Icon(_isPasswordVisible
@@ -80,7 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   obscureText: !_isPasswordVisible,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Por favor, ingresa tu contraseña';
+                      return 'Please enter your password';
                     }
                     return null;
                   },
@@ -116,8 +117,15 @@ class _SignInScreenState extends State<SignInScreen> {
                               User? user = userCredential.user;
 
                               if (user != null) {
+                                print(userCredential);
                                 String? token = await user.getIdToken();
-                                print("Token de acceso: $token");
+                                String? userId = user.uid;
+                                LocalStorage.sharedPreferences
+                                    .setString('token', token!);
+
+                                LocalStorage.sharedPreferences
+                                    .setString('userId', userId);
+                                // ignore: use_build_context_synchronously
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -127,13 +135,13 @@ class _SignInScreenState extends State<SignInScreen> {
                               } else {
                                 setState(() {
                                   _errorMessage =
-                                      'Las credenciales son incorrectas.';
+                                      'Incorrect credentials. Please try again.';
                                 });
                               }
                             } catch (error) {
                               setState(() {
                                 _errorMessage =
-                                    'Ocurrió un error al iniciar sesión.';
+                                    'Error has occurred. Please try again.';
                               });
                             }
                           }
@@ -141,7 +149,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Iniciar Sesión'),
+                            Text('Login'),
                             Icon(Icons.login),
                           ],
                         ),

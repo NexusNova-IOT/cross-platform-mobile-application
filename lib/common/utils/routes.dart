@@ -17,16 +17,17 @@ class Routes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(role);
     List<Widget> routes = [];
 
-    if (role == UserType.guide.toString()) {
+    if (role == 'ROLE_AGENCY') {
       routes = [
         const TourPackages(),
         Notifications(),
         const AnimatedMarkerMap(),
         UserProfile(),
       ];
-    } else if (role == UserType.tourist.toString()) {
+    } else if (role == 'ROLE_TOURIST') {
       routes = [
         Weather(),
         Notifications(),
@@ -54,4 +55,3 @@ class CalendarRoute extends StatelessWidget {
     );
   }
 }
-
