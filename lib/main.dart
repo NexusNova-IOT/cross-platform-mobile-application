@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:life_travel/common/config/local_storage.dart';
 import 'package:life_travel/identity_access_management/presentation/identity_access.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorage.init();
   await Firebase.initializeApp();
   runApp(const MainApp());
 }
