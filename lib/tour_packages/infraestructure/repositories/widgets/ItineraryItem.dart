@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_travel/tour_packages/infraestructure/repositories/widgets/CustomRectangle.dart';
+import 'package:life_travel/tour_packages/infraestructure/repositories/widgets/tour_package_detail.dart';
 
 class ItineraryItem extends StatefulWidget {
   @override
@@ -49,22 +50,20 @@ class _ItineraryItemState extends State<ItineraryItem> {
               ),
               subtitle: Row(
                 children: [
-                  Container(
-                    width: 80,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: const Color(0xFF5A5A5A),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(const Color(0xFF5A5A5A)),
                     ),
-                    child: const Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 8),
-                        child: Text(
-                          'See more',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TourPackageDetail()),
+                      );
+                    },
+                    child: const Text(
+                      'See more',
+                      style: TextStyle(
+                        color: Colors.white,
                       ),
                     ),
                   ),
