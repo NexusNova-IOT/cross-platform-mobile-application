@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:life_travel/tour_packages/presentation/CustomRectangle.dart';
 
 class TourItem extends StatefulWidget {
   @override
@@ -87,4 +86,3 @@ class _TourItemState extends State<TourItem> {
     );
   }
 }
-
