@@ -4,8 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:life_travel/common/config/local_storage.dart';
 
 class ApiService {
-  final String baseUrl =
-      'https://lifetravel-iot-backend.azurewebsites.net/api/v1';
+  final String baseUrl = 'https://lifetravel-iot-api.azurewebsites.net/api/v1';
   final Object? token = LocalStorage.sharedPreferences.get('token') as String?;
 
   Future<Map<String, dynamic>> login(String userId) async {

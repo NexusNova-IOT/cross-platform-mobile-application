@@ -56,7 +56,13 @@ class _BaseState extends State<Base> {
       future: role,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                  width: 50, height: 50, child: CircularProgressIndicator()),
+            ],
+          );
         } else if (snapshot.hasError) {
           return Center(
             child: Text('Error: ${snapshot.error}'),
