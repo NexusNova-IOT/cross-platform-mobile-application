@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:life_travel/tour_packages/infraestructure/repositories/widgets/CustomRectangle.dart';
 import 'package:life_travel/tour_packages/infraestructure/repositories/widgets/tour_package_detail.dart';
 
-class ItineraryItem extends StatefulWidget {
-  @override
-  _ItineraryItemState createState() => _ItineraryItemState();
-}
+class ItineraryItem extends StatelessWidget {
+  final String Title;
+  final String agency;
+  final String imgUrl;
 
-class _ItineraryItemState extends State<ItineraryItem> {
+  const ItineraryItem({
+    required this.Title,
+    required this.agency,
+    required this.imgUrl,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,13 +28,13 @@ class _ItineraryItemState extends State<ItineraryItem> {
             ),
             child: ListTile(
               contentPadding: const EdgeInsets.all(8),
-              title: const Column(
+              title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: EdgeInsets.only(bottom: 8, left: 8),
                     child: Text(
-                      'MACHU PICCHU',
+                      Title,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -40,7 +45,7 @@ class _ItineraryItemState extends State<ItineraryItem> {
                   Padding(
                     padding: EdgeInsets.only(bottom: 8, left: 8),
                     child: Text(
-                      'Cusco',
+                      agency,
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -73,8 +78,8 @@ class _ItineraryItemState extends State<ItineraryItem> {
                 width: 120,
                 height: 120,
                 child: Center(
-                  child: Image.asset(
-                    'images/profile_image.png',
+                  child: Image.network(
+                    imgUrl,
                     width: 70,
                     height: 70,
                   ),
