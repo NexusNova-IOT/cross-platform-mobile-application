@@ -7,15 +7,15 @@ class CustomRectangle extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
         side: const BorderSide(
-          color: Colors.black, // Color del borde
-          width: 3.0, // Grosor del borde
+          color: Colors.black,
+          width: 3.0,
         ),
       ),
       child: Container(
         padding: const EdgeInsets.all(0),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16), // Bordes circulares
-          color: const Color(0xFFDDDDDD), // Color del rectángulo principal
+          borderRadius: BorderRadius.circular(16),
+          color: const Color(0xFFDDDDDD),
         ),
         child: Row(
           children: [
