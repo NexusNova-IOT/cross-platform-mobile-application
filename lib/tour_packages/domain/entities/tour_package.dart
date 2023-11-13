@@ -4,21 +4,33 @@ import 'package:meta/meta.dart';
 class TourPackage extends Equatable {
     TourPackage({
         required this.id,
-        required this.tourPackageId,
-        required this.tourExperienceDate,
-        required this.tourPackageTitle,
-        required this.agencyName,
+        required this.title,
+        required this.departmentName,
+        required this.description,
         required this.imgUrl,
+        required this.rating,
+        required this.meetingPointLatitude,
+        required this.meetingPointLongitude,
     });
 
     final int id;
-    final int tourPackageId;
-    final DateTime tourExperienceDate;
-    final String tourPackageTitle;
-    final String agencyName;
+    final String title;
+    final String departmentName;
+    final String description;
     final String imgUrl;
+    final int rating;
+    final double meetingPointLatitude;
+    final double meetingPointLongitude;
 
     @override
-    List<Object> get props => <Object>[id, tourPackageId, tourExperienceDate, tourPackageTitle, agencyName, imgUrl];
-
+    List<Object> get props => <Object>[
+        id,
+        title,
+        departmentName,
+        description,
+        imgUrl,
+        rating,
+        meetingPointLatitude,
+        meetingPointLongitude,
+    ];
 }
