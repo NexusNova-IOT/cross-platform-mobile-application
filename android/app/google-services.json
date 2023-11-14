@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "56490004415",
+    "project_id": "lifetravel-app",
+    "storage_bucket": "lifetravel-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56490004415:android:23626955360eca9f599b0a",
+        "android_client_info": {
+          "package_name": "com.example.life_travel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56490004415-ghf5g6djublettqikikeno9ch7bbss7j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.life_travel",
+            "certificate_hash": "f7bd5132b2474b9af62ee1f4b5fae0b57decdd85"
+          }
+        },
+        {
+          "client_id": "56490004415-v6ii2hsq6eg3ddmqm9r0654n62jlk8rq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1JJg95DFt_ChCpE-zic_v4oQHHXMx1B8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56490004415-v6ii2hsq6eg3ddmqm9r0654n62jlk8rq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

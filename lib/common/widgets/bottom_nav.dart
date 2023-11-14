@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:life_travel/common/utils/routes.dart';
 import 'package:life_travel/common/utils/user_type.dart';
 
 class BottomNav extends StatefulWidget {
@@ -20,7 +19,7 @@ class _BottomNavState extends State<BottomNav> {
   Widget build(BuildContext context) {
     List<BottomNavigationBarItem> bottomNavBarItems = [];
 
-    if (widget.role == UserType.guide.toString()) {
+    if (widget.role == 'ROLE_AGENCY') {
       bottomNavBarItems = [
         const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         const BottomNavigationBarItem(
@@ -30,7 +29,7 @@ class _BottomNavState extends State<BottomNav> {
         const BottomNavigationBarItem(
             icon: Icon(Icons.person), label: 'Profile'),
       ];
-    } else if (widget.role == UserType.tourist.toString()) {
+    } else if (widget.role == 'ROLE_TOURIST') {
       bottomNavBarItems = [
         const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         const BottomNavigationBarItem(

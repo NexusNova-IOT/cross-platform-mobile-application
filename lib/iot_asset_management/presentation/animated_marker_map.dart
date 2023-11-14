@@ -96,14 +96,14 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
         Marker(
           point:
               LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
-          child: const MyLocationMarker(role: UserType.guide),
+          child: const MyLocationMarker(role: UserType.ROLE_AGENCY),
         ),
       );
     }
     markers.addAll(touristSample.map((touristItem) {
       return Marker(
         point: touristItem.location,
-        child: const MyLocationMarker(role: UserType.tourist),
+        child: const MyLocationMarker(role: UserType.ROLE_TOURIST),
       );
     }));
     return markers;
