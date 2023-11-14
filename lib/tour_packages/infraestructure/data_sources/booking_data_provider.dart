@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:life_travel/tour_packages/api/booking_api.dart';
 import 'package:life_travel/tour_packages/infraestructure/models/booking_model.dart';
 import 'package:http/http.dart' as http;
@@ -15,26 +17,33 @@ class BookingDataProvider {
     return token;
   }
 
-  Future<List<BookingModel>> getBookingsByTouritstId(String id) async {
-    try {
-      final bearerToken = await getBearerToken();
+  Future<List<BookingModel>> getBookingsByTouristId(String id) async {
+  try {
+    final bearerToken = await getBearerToken();
+    print("Ingresa");
+    final response = await http.get(
+      Uri.parse('${BookingApi.baseUrl}${BookingApi.bookings}/tourist/$id'),
+      headers: {'Authorization': 'Bearer $bearerToken'},
+    );
+    print("Sale");
+    print(response.body);
 
-      final response = await http.get(
-        Uri.parse('${BookingApi.baseUrl}${BookingApi.bookings}/tourist/$id'),
-        headers: {'Authorization': 'Bearer $bearerToken'}, // Agrega el encabezado con el token de portador.
-      );
+    if (response.statusCode == 200) {
+      // Use json.decode to parse the response body
+      final List<dynamic> jsonData = json.decode(response.body);
 
-      if (response.statusCode == 200) {
-        final List<dynamic> jsonData = response.body as List<dynamic>;
-        final List<BookingModel> bookings =
-        jsonData.map((json) => BookingModel.fromJson(json)).toList();
-        return bookings;
-      } else {
-        throw Exception(
-            'Failed to get bookings. Status code: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('Failed to get bookings: $e');
+      // Map each JSON object to a BookingModel
+      final List<BookingModel> bookings = jsonData
+          .map((json) => BookingModel.fromJson(json))
+          .toList();
+
+      return bookings;
+    } else {
+      throw Exception(
+          'Failed to get bookings. Status code: ${response.statusCode}');
     }
+  } catch (e) {
+    throw Exception('Failed to get bookings: $e');
   }
+}
 }

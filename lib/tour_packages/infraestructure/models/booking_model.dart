@@ -4,7 +4,7 @@ class BookingModel extends Booking {
   BookingModel({
     required int id,
     required int tourPackageId,
-    required DateTime tourExperienceDate,
+    required String tourExperienceDate,
     required String tourPackageTitle,
     required String agencyName,
     required String imgUrl,

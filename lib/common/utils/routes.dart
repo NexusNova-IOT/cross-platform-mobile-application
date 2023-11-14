@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_travel/common/utils/user_type.dart';
 import 'package:life_travel/iot_asset_management/presentation/animated_marker_map.dart';
-import 'package:life_travel/iot_asset_management/presentation/weather_iot.dart';
 import 'package:life_travel/tour_packages/presentation/tour_packages.dart';
 
 import '../../notifications/presentation/notifications.dart';
@@ -17,21 +16,20 @@ class Routes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(role);
     List<Widget> routes = [];
 
-    if (role == 'ROLE_AGENCY') {
+    if (role == UserType.guide.toString()) {
       routes = [
         const TourPackages(),
         Notifications(),
         const AnimatedMarkerMap(),
         UserProfile(),
       ];
-    } else if (role == 'ROLE_TOURIST') {
+    } else if (role == UserType.tourist.toString()) {
       routes = [
-        Weather(),
-        Notifications(),
         const TourPackages(),
+        Notifications(),
+        const CalendarRoute(),
         UserProfile(),
       ];
     }
@@ -55,3 +53,4 @@ class CalendarRoute extends StatelessWidget {
     );
   }
 }
+

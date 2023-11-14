@@ -12,7 +12,7 @@ class Booking extends Equatable {
 
   final int id;
   final int tourPackageId;
-  final DateTime tourExperienceDate;
+  final String tourExperienceDate;
   final String tourPackageTitle;
   final String agencyName;
   final String imgUrl;

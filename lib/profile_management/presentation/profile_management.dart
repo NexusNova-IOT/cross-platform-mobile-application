@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:life_travel/identity_access_management/presentation/identity_access.dart';
+
+import '../../common/widgets/bottom_nav.dart';
 
 class UserProfile extends StatefulWidget {
-  const UserProfile({super.key});
-
   @override
   _UserProfileState createState() => _UserProfileState();
 }
@@ -34,6 +32,7 @@ class _UserProfileState extends State<UserProfile> {
             ),
             child: Stack(
               children: [
+                // Botón de retroceso
                 Container(
                   margin: const EdgeInsets.only(left: 20.0, top: 10.0),
                   child: CircleAvatar(
@@ -169,22 +168,6 @@ class _UserProfileState extends State<UserProfile> {
                 ),
               ],
             ),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              try {
-                await FirebaseAuth.instance.signOut();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SignInScreen(),
-                  ),
-                );
-              } catch (e) {
-                print("Error al cerrar sesión: $e");
-              }
-            },
-            child: Text('Logout'),
           ),
         ],
       ),

@@ -11,12 +11,12 @@ class MyLocationMarker extends StatelessWidget {
     return SizedBox(
       height: 50,
       width: 50,
-      child: role == UserType.ROLE_AGENCY
+      child: role == UserType.guide
           ? Container(
               decoration: const BoxDecoration(shape: BoxShape.circle),
               child: const Icon(Icons.tour, size: 30, color: Colors.amber),
             )
-          : role == UserType.ROLE_TOURIST
+          : role == UserType.tourist
               ? Container(
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,

@@ -10,7 +10,7 @@ class BookingListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<BookingListBloc>(
-      create: (BuildContext context) =>
+      create: (BuildContext context) => 
       serviceLocator<BookingListBloc>()..add(FetchBookingListEvent()),
       child: BlocBuilder<BookingListBloc, BookingListState>(
         builder: (BuildContext context, BookingListState state) {
