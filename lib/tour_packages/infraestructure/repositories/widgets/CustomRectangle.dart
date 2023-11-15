@@ -1,30 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CustomRectangle extends StatelessWidget {
+  final String date;
+
+  CustomRectangle({required this.date});
+
   @override
   Widget build(BuildContext context) {
+    DateTime dateConverted = DateTime.parse(date);
+    String formattedDate = DateFormat('MM/dd/yyyy - HH:mm:ss').format(dateConverted);
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
         side: const BorderSide(
-          color: Colors.black, // Color del borde
-          width: 3.0, // Grosor del borde
+          color: Colors.black,
+          width: 3.0,
         ),
       ),
       child: Container(
-        padding: const EdgeInsets.all(0),
+        padding: EdgeInsets.all(0),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16), // Bordes circulares
-          color: const Color(0xFFDDDDDD), // Color del rectángulo principal
+          borderRadius: BorderRadius.circular(16),
+          color: Color(0xFFDDDDDD),
         ),
         child: Row(
           children: [
-            const Row(
+            Row(
               children: [
                 Padding(
                   padding: EdgeInsets.only(right: 50.0, left: 25.0),
                   child: Text(
-                    '04:00 AM - 14:00 PM',
+                    formattedDate,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),

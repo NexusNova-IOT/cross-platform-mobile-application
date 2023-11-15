@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:life_travel/tour_packages/infraestructure/repositories/widgets/CustomRectangle.dart';
-import 'package:life_travel/tour_packages/infraestructure/repositories/widgets/tour_package_detail.dart';
+import 'package:life_travel/tour_packages/presentation/tour_package_detail/tour_package_detail.dart';
 
-class ItineraryItem extends StatefulWidget {
-  @override
-  _ItineraryItemState createState() => _ItineraryItemState();
-}
+class ItineraryItem extends StatelessWidget {
+  final String Title;
+  final String agency;
+  final String imgUrl;
+  final String date;
+  final int tourPackageId;
 
-class _ItineraryItemState extends State<ItineraryItem> {
+  const ItineraryItem({
+    required this.Title,
+    required this.agency,
+    required this.imgUrl,
+    required this.date,
+    required this.tourPackageId,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         children: [
-          CustomRectangle(),
+          CustomRectangle(date: date),
           Card(
             color: const Color(0xFF161D2F),
             elevation: 0, // Sin sombra
@@ -23,13 +32,13 @@ class _ItineraryItemState extends State<ItineraryItem> {
             ),
             child: ListTile(
               contentPadding: const EdgeInsets.all(8),
-              title: const Column(
+              title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: EdgeInsets.only(bottom: 8, left: 8),
                     child: Text(
-                      'MACHU PICCHU',
+                      Title,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -40,7 +49,7 @@ class _ItineraryItemState extends State<ItineraryItem> {
                   Padding(
                     padding: EdgeInsets.only(bottom: 8, left: 8),
                     child: Text(
-                      'Cusco',
+                      agency,
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -57,7 +66,7 @@ class _ItineraryItemState extends State<ItineraryItem> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => TourPackageDetail()),
+                        MaterialPageRoute(builder: (context) => TourPackageDetail(tourPackageId: tourPackageId)),
                       );
                     },
                     child: const Text(
