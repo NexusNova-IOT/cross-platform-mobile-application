@@ -57,8 +57,8 @@ class TourPackageDetail extends StatelessWidget {
                       Center(
                         child: Image.network(
                           tourPackage.imgUrl,
-                          width: 200, // ajusta el tamaño según tus necesidades
-                          height: 200, // ajusta el tamaño según tus necesidades
+                          width: 200,
+                          height: 200,
                         ),
                       ),
                       Padding(

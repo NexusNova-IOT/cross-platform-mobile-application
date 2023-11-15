@@ -19,7 +19,6 @@ class BookingListBloc extends Bloc<BookingListEvent, BookingListState> {
       Emitter<BookingListState> emit,
       ) async {
     try {
-      // "ID_DEL_TURISTA" se debe obtener
       final String touristId = LocalStorage.sharedPreferences.getString('userId') ?? "";
       final List<Booking> bookings = await bookingService.getBookingByTouristId(touristId);
       emit(BookingListLoadedState(bookings));

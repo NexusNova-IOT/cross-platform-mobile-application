@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class BookingDataProvider {
   Future<String> getBearerToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? token = prefs.getString('token'); // Ajusta la clave según como almacenas el token.
+    final String? token = prefs.getString('token');
 
     if (token == null) {
       throw Exception('No se encontró el token en SharedPreferences.');
