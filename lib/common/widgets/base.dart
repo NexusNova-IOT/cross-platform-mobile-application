@@ -38,6 +38,7 @@ class _BaseState extends State<Base> {
         });
 
         if (userRole != null) {
+          LocalStorage.sharedPreferences.setString('userRole', userRole!);
           print(userRole);
           return userRole;
         }
