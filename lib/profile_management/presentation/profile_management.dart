@@ -1,192 +1,76 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:life_travel/identity_access_management/presentation/identity_access.dart';
+import 'package:life_travel/profile_management/infraestructure/repositories/widgets/profile_management.dart';
+import 'package:life_travel/profile_management/presentation/widgets/agency_profile_widget.dart';
+import 'package:life_travel/profile_management/presentation/widgets/tourist_profile_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:life_travel/profile_management/domain/entities/agency_profile.dart';
+import 'package:life_travel/profile_management/domain/entities/tourist_profile.dart';
+import 'package:life_travel/profile_management/domain/interfaces/profile_management_repository.dart';
+import 'package:life_travel/profile_management/infraestructure/data_sources/profile_management.dart';
 
 class UserProfile extends StatefulWidget {
-  const UserProfile({super.key});
+  const UserProfile({Key? key}) : super(key: key);
 
   @override
   _UserProfileState createState() => _UserProfileState();
 }
 
 class _UserProfileState extends State<UserProfile> {
-  int _selectedIndex = 0;
+  late Future<String?> _userRole;
+  late Future<dynamic> _userProfile;
 
-  void handleIndexChanged(int newIndex) {
-    setState(() {
-      _selectedIndex = newIndex;
-    });
+  final ProfileManagementRepository profileManagementRepository =
+      ProfileManagementRepositoryImpl(
+    profileManagementDataProvider: ProfileManagementDataProvider(),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _userRole = _getUserRole();
+    _userProfile = _getUserProfile();
+  }
+
+  Future<String?> _getUserRole() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('userRole');
+  }
+
+  Future<dynamic> _getUserProfile() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final userId = prefs.getString('userId');
+
+    final userRole = await _userRole;
+
+    if (userRole == 'ROLE_AGENCY') {
+      return profileManagementRepository.getAgencyProfile(userId!);
+    } else if (userRole == 'ROLE_TOURIST') {
+      return profileManagementRepository.getTouristProfile(userId!);
+    }
+
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.only(left: 0.0, top: 50.0, bottom: 50.0),
-            decoration: const BoxDecoration(
-              color: Color(0xFF161D2F),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10.0),
-                topRight: Radius.circular(10.0),
-              ),
-            ),
-            child: Stack(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 20.0, top: 10.0),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 20.0,
-                    child: IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      onPressed: () {
-                        //poner a donde va atras
-                      },
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                const Align(
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        radius: 70,
-                        backgroundImage: AssetImage('images/profile_image.png'),
-                        // backgroundImage: AssetImage('assets/images/profile_image.png'),
-                      ),
-                      Text(
-                        "Username",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "Role type",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
-            color: Colors.white,
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Last Name',
-                    labelStyle: const TextStyle(color: Colors.black),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10.0),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'First Name',
-                    labelStyle: const TextStyle(color: Colors.black),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10.0),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Phone',
-                    labelStyle: const TextStyle(color: Colors.black),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10.0),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: const TextStyle(color: Colors.black),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              try {
-                await FirebaseAuth.instance.signOut();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SignInScreen(),
-                  ),
-                );
-              } catch (e) {
-                print("Error al cerrar sesión: $e");
-              }
-            },
-            child: Text('Logout'),
-          ),
-        ],
+      body: FutureBuilder<dynamic>(
+        future: _userProfile,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            final userProfile = snapshot.data;
+
+            return userProfile is AgencyProfile
+                ? AgencyProfileWidget(userProfile: userProfile)
+                : userProfile is TouristProfile
+                    ? TouristProfileWidget(userProfile: userProfile)
+                    : Container();
+          }
+        },
       ),
     );
   }
