@@ -20,7 +20,16 @@ class BookingListBloc extends Bloc<BookingListEvent, BookingListState> {
       ) async {
     try {
       final String touristId = LocalStorage.sharedPreferences.getString('userId') ?? "";
-      final List<Booking> bookings = await bookingService.getBookingByTouristId(touristId);
+      final String role = LocalStorage.sharedPreferences.getString('userRole') ?? "";
+      List<Booking> bookings;
+
+      if (role == "ROLE_TOURIST") {
+        bookings = await bookingService.getBookingByTouristId(touristId);
+      } else if (role == "ROLE_AGENCY") {
+        bookings = await bookingService.getBookingByAgencyId(touristId);
+      } else {
+        bookings = [];
+      }
       emit(BookingListLoadedState(bookings));
     } catch (e) {
       emit(BookingListErrorState("Error fetching booking list: $e"));

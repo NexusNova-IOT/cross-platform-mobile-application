@@ -9,4 +9,8 @@ class BookingFacadeService {
   Future<List<Booking>> getBookingByTouristId(String id) {
     return bookingRepository.getBookingsByTouristId(id);
   }
+
+  Future<List<Booking>> getBookingByAgencyId(String id) {
+    return bookingRepository.getBookingsByAgencyId(id);
+  }
 }

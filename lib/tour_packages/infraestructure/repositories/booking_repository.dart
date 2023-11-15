@@ -17,4 +17,14 @@ class BookingRepositoryImpl implements BookingRepository {
     }
   }
 
+  @override
+  Future<List<Booking>> getBookingsByAgencyId(String id) async {
+    try {
+      final List<Booking> bookings = await dataProvider.getBookingsByAgencyId(id);
+      return bookings;
+    } catch (e) {
+      throw Exception('Failed to get the bookings with agency ID $id: $e');
+    }
+  }
+
 }
