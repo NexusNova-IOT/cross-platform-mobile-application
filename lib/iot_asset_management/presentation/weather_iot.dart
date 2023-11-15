@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_travel/common/widgets/life_travel_app_bar.dart';
-import 'package:life_travel/iot_asset_management/infraestructure/repositories/widgets/tour_item.dart';
+import 'package:life_travel/iot_asset_management/presentation/tour_package_item/tour_item.dart';
 
 import '../infraestructure/repositories/widgets/recomendation_section.dart';
 import '../infraestructure/repositories/widgets/weather_information.dart';
