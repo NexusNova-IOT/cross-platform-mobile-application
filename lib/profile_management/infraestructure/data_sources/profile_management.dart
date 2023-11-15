@@ -4,7 +4,6 @@ import 'package:life_travel/common/config/local_storage.dart';
 import 'package:life_travel/profile_management/api/profile_management.dart';
 import 'package:life_travel/profile_management/domain/entities/agency_profile.dart';
 import 'package:life_travel/profile_management/domain/entities/tourist_profile.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class ProfileManagementDataProvider {
@@ -34,11 +33,10 @@ class ProfileManagementDataProvider {
         Uri.parse(url),
         headers: {'Authorization': 'Bearer $token'},
       );
-      print(response);
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        print(data);
+
         return TouristProfile.fromJson(data);
       } else {
         throw Exception(
@@ -63,9 +61,6 @@ class ProfileManagementDataProvider {
         Uri.parse(url),
         headers: {'Authorization': 'Bearer $token'},
       );
-      print(response.body);
-      print(url);
-      print(token);
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
