@@ -2,16 +2,14 @@ import '../../domain/entities/booking.dart';
 
 class BookingModel extends Booking {
   BookingModel({
-    required int id,
     required int tourPackageId,
-    required String tourExperienceDate,
+    required String tourDate,
     required String tourPackageTitle,
     required String agencyName,
     required String imgUrl,
   }) : super(
-    id: id,
     tourPackageId: tourPackageId,
-    tourExperienceDate: tourExperienceDate,
+    tourDate: tourDate,
     tourPackageTitle: tourPackageTitle,
     agencyName: agencyName,
     imgUrl: imgUrl,
@@ -19,9 +17,8 @@ class BookingModel extends Booking {
 
   factory BookingModel.fromJson(Map<String, dynamic> json) {
     return BookingModel(
-      id: json['id'],
       tourPackageId: json['tourPackageId'],
-      tourExperienceDate: json['tourExperienceDate'],
+      tourDate: json['tourDate'],
       tourPackageTitle: json['tourPackageTitle'],
       agencyName: json['agencyName'],
       imgUrl: json['imgUrl'],
@@ -30,9 +27,8 @@ class BookingModel extends Booking {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'tourPackageId': tourPackageId,
-      'tourExperienceDate': tourExperienceDate,
+      'tourDate': tourDate,
       'tourPackageTitle': tourPackageTitle,
       'agencyName': agencyName,
       'imgUrl': imgUrl,

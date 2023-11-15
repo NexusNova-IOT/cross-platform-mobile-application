@@ -134,7 +134,7 @@ class TourPackageDetail extends StatelessWidget {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  'Latitude: ${tourPackage.meetintPointLatitude}',
+                                  'Latitude: ${tourPackage.meetingPointLatitude}',
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.white,
@@ -145,7 +145,7 @@ class TourPackageDetail extends StatelessWidget {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  'Longitude: ${tourPackage.meetintPointLongitude}',
+                                  'Longitude: ${tourPackage.meetingPointLongitude}',
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.white,

@@ -23,7 +23,7 @@ class BookingListScreen extends StatelessWidget {
                   Title: booking.tourPackageTitle,
                   agency: booking.agencyName,
                   imgUrl: booking.imgUrl,
-                  date: booking.tourExperienceDate,
+                  date: booking.tourDate,
                   tourPackageId: booking.tourPackageId,
                 );
               },

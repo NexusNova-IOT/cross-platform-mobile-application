@@ -9,8 +9,8 @@ class TourPackage extends Equatable {
         required this.description,
         required this.imgUrl,
         required this.rating,
-        required this.meetintPointLatitude,
-        required this.meetintPointLongitude,
+        required this.meetingPointLatitude,
+        required this.meetingPointLongitude,
     });
 
     final int id;
@@ -19,8 +19,8 @@ class TourPackage extends Equatable {
     final String description;
     final String imgUrl;
     final double rating;
-    final double meetintPointLatitude;
-    final double meetintPointLongitude;
+    final double meetingPointLatitude;
+    final double meetingPointLongitude;
 
     @override
     List<Object> get props => <Object>[
@@ -30,7 +30,7 @@ class TourPackage extends Equatable {
         description,
         imgUrl,
         rating,
-        meetintPointLatitude,
-        meetintPointLongitude,
+        meetingPointLatitude,
+        meetingPointLongitude,
     ];
 }
