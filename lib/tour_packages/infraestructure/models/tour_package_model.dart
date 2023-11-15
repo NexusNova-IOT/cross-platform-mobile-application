@@ -9,8 +9,8 @@ class TourPackageModel extends TourPackage {
     required String description,
     required String imgUrl,
     required double rating,
-    required double meetintPointLatitude,
-    required double meetintPointLongitude,
+    required double meetingPointLatitude,
+    required double meetingPointLongitude,
   }) : super(
           id: id,
           title: title,
@@ -18,8 +18,8 @@ class TourPackageModel extends TourPackage {
           description: description,
           imgUrl: imgUrl,
           rating: rating,
-          meetintPointLatitude: meetintPointLatitude,
-          meetintPointLongitude: meetintPointLongitude,
+          meetingPointLatitude: meetingPointLatitude,
+          meetingPointLongitude: meetingPointLongitude,
         );
 
   factory TourPackageModel.fromJson(Map<String, dynamic> json) {
@@ -30,8 +30,8 @@ class TourPackageModel extends TourPackage {
       description: json['description'],
       imgUrl: json['imgUrl'],
       rating: json['rating'],
-      meetintPointLatitude: json['meetintPointLatitude'],
-      meetintPointLongitude: json['meetintPointLongitude'],
+      meetingPointLatitude: json['meetingPointLatitude'],
+      meetingPointLongitude: json['meetingPointLongitude'],
     );
   }
 
@@ -43,8 +43,8 @@ class TourPackageModel extends TourPackage {
       'description': description,
       'imgUrl': imgUrl,
       'rating': rating,
-      'meetintPointLatitude': meetintPointLatitude,
-      'meetintPointLongitude': meetintPointLongitude,
+      'meetingPointLatitude': meetingPointLatitude,
+      'meetingPointLongitude': meetingPointLongitude,
     };
   }
 }
