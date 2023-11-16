@@ -39,12 +39,14 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
     _getCurrentPosition();
 
     _positionUpdateTimer = Timer.periodic(const Duration(seconds: 10), (timer) {
+      resetPositions();
       _getCurrentPosition();
     });
 
     getLocations();
 
     _touristPositionTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      resetPositions();
       getLocations();
     });
   }
@@ -61,6 +63,10 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
   void dispose() {
     _positionUpdateTimer.cancel();
     super.dispose();
+  }
+
+  void resetPositions(){
+    markers = [];
   }
 
   Future<void> _getCurrentPosition() async {
