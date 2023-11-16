@@ -87,10 +87,10 @@ class TourItem extends StatelessWidget {
                     width: 120,
                     height: 120,
                     child: Center(
-                      child: Image.asset(
-                        'images/profile_image.png',
-                        width: 70,
-                        height: 70,
+                      child: Image.network(
+                        booking.imgUrl,
+                        width: 200,
+                        height: 200,
                       ),
                     ),
                   ),
