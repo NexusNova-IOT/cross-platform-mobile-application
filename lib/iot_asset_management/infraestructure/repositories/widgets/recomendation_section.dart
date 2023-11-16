@@ -9,15 +9,16 @@ class RecommendationSection extends StatelessWidget {
           children: [
             // Sección de Ropa
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0), // Padding izquierda y derecha
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0), // Padding izquierda y derecha
               child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFFF25858), // Fondo de color #F25858
+                  color: const Color(0xFFF25858), // Fondo de color #F25858
                   border: Border.all(color: Colors.black),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Icon(
                     Icons.local_mall, // Icono de ropa
                     color: Colors.black, // Icono en negro
@@ -26,8 +27,8 @@ class RecommendationSection extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 16),
-            Column(
+            const SizedBox(width: 16),
+            const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -46,22 +47,21 @@ class RecommendationSection extends StatelessWidget {
             ),
           ],
         ),
-
-        SizedBox(height: 16),
-
+        const SizedBox(height: 16),
         Row(
           children: [
             // Sección de Sombrilla
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0), // Padding izquierda y derecha
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0), // Padding izquierda y derecha
               child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFF54A9E7), // Fondo de color #54A9E7
+                  color: const Color(0xFF54A9E7), // Fondo de color #54A9E7
                   border: Border.all(color: Colors.black),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Icon(
                     Icons.beach_access, // Icono de sombrilla
                     color: Colors.black, // Icono en negro
@@ -70,8 +70,8 @@ class RecommendationSection extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 16),
-            Column(
+            const SizedBox(width: 16),
+            const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(

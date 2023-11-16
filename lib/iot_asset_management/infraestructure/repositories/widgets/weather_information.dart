@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 
 class WeatherWidget extends StatelessWidget {
+  const WeatherWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 25, top: 16, bottom: 16), // Padding arriba, izquierda y abajo
+      padding: const EdgeInsets.only(left: 25, top: 16, bottom: 16),
       child: Row(
         children: [
-          // Imagen del clima a la izquierda
           Image.asset(
             'images/weather.png',
-            width: 80, // Ancho de la imagen
-            height: 80, // Alto de la imagen
+            width: 80,
+            height: 80,
           ),
-          SizedBox(width: 20), // Espacio entre la imagen y el texto
-
-          // Temperatura a la derecha
-          Text(
+          const SizedBox(width: 20),
+          const Text(
             'temperature',
             style: TextStyle(
               fontSize: 16,
