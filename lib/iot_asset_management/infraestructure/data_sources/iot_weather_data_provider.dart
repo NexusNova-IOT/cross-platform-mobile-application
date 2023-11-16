@@ -24,12 +24,11 @@ class IotWeatherDataProvider {
         Uri.parse('${IotWeatherApi.baseUrl}${IotWeatherApi.weatherSensor}/$id'),
         headers: {'Authorization': 'Bearer $bearerToken'},
       );
-      print(response.body);
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonData = json.decode(response.body);
         final IotWeatherModel iotWeatherInfo =
-        IotWeatherModel.fromJson(jsonData);
+            IotWeatherModel.fromJson(jsonData);
         return iotWeatherInfo;
       } else {
         throw Exception(

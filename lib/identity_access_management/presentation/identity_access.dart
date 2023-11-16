@@ -114,7 +114,6 @@ class _SignInScreenState extends State<SignInScreen> {
                               User? user = userCredential.user;
 
                               if (user != null) {
-                                print(userCredential);
                                 String? token = await user.getIdToken();
                                 String? userId = user.uid;
                                 LocalStorage.sharedPreferences

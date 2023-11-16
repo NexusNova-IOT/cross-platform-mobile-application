@@ -16,7 +16,6 @@ class Routes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(role);
     List<Widget> routes = [];
 
     if (role == 'ROLE_AGENCY') {

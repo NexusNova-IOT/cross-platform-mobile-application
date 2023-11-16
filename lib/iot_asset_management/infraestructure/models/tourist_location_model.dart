@@ -12,8 +12,6 @@ class TouristLocationModel extends TouristGpsLocation {
       required super.imgUrl});
 
   factory TouristLocationModel.fromJson(Map<String, dynamic> json) {
-    // ignore: avoid_print
-    print("json factory" + json.toString());
     return TouristLocationModel(
       id: json['id'],
       latitude: json['latitude'],

@@ -18,7 +18,6 @@ class TouristLocationRepositoryImpl implements TouristLocationInterface {
       final List<TouristLocationModel> touristLocations = await gpsDataProvider
           .getTouristLocationByTouristId(userId.toString());
 
-      print("repository : " + touristLocations.toString());
 
       return touristLocations;
     } catch (e) {

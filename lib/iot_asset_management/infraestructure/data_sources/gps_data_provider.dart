@@ -26,17 +26,12 @@ class GpsDataProvider {
       final response = await http.get(Uri.parse(url),
           headers: {'Authorization': 'Bearer $bearerToken'});
 
-      print("response body " + response.body);
-      print(url);
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = json.decode(response.body);
 
-        print("json data " + jsonData.toString());
         final List<TouristLocationModel> touristLocations = jsonData
             .map((json) => TouristLocationModel.fromJson(json))
             .toList();
-
-        print("tourist locations " + touristLocations.toString());
 
         return touristLocations;
       } else {

@@ -10,7 +10,6 @@ class ApiService {
   Future<Map<String, dynamic>> login(String userId) async {
     final String apiUrl = '$baseUrl/users/login/$userId';
 
-    print('API URL: $apiUrl');
     final response = await http.get(
       Uri.parse(apiUrl),
       headers: {
