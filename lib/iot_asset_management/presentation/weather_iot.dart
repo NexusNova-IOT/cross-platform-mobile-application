@@ -3,7 +3,7 @@ import 'package:life_travel/common/widgets/life_travel_app_bar.dart';
 import 'package:life_travel/iot_asset_management/presentation/tour_package_item/tour_item.dart';
 
 import '../infraestructure/repositories/widgets/recomendation_section.dart';
-import '../infraestructure/repositories/widgets/weather_information.dart';
+import 'weather_iot_detail/weather_information.dart';
 
 class Weather extends StatefulWidget {
   const Weather({Key? key}) : super(key: key);
