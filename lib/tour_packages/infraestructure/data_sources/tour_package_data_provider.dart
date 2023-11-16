@@ -28,7 +28,7 @@ class TourPackageDataProvider {
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = response.body as List<dynamic>;
         final List<TourPackageModel> tourPackages =
-        jsonData.map((json) => TourPackageModel.fromJson(json)).toList();
+            jsonData.map((json) => TourPackageModel.fromJson(json)).toList();
         return tourPackages;
       } else {
         throw Exception(
@@ -43,15 +43,15 @@ class TourPackageDataProvider {
     try {
       final bearerToken = await getBearerToken();
       final response = await http.get(
-        Uri.parse('${TourPackageApi.baseUrl}${TourPackageApi.tourPackages}/$id'),
+        Uri.parse(
+            '${TourPackageApi.baseUrl}${TourPackageApi.tourPackages}/$id'),
         headers: {'Authorization': 'Bearer $bearerToken'},
       );
-      print(response.body);
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonData = json.decode(response.body);
         final TourPackageModel tourPackage =
-        TourPackageModel.fromJson(jsonData);
+            TourPackageModel.fromJson(jsonData);
         return tourPackage;
       } else {
         throw Exception(

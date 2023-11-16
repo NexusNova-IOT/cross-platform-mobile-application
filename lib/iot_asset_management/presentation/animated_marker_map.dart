@@ -25,6 +25,7 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
   Position? _currentPosition;
   late Timer _positionUpdateTimer;
   late Timer _touristPositionTimer;
+  List<Marker> markers = [];
 
   late List<TouristLocationModel> touristLocations = [];
   final TouristLocationRepositoryImpl touristLocationInterface =
@@ -43,8 +44,7 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
 
     getLocations();
 
-    _touristPositionTimer =
-        Timer.periodic(const Duration(seconds: 10), (timer) {
+    _touristPositionTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
       getLocations();
     });
   }
@@ -109,8 +109,6 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
   }
 
   List<Marker> _buildMarkers() {
-    final List<Marker> markers = [];
-
     if (_currentPosition != null) {
       markers.add(
         Marker(
@@ -121,12 +119,11 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
       );
     }
 
-    if (touristLocations.isNotEmpty) {
-      for (final touristLocation in touristLocations) {
-        Marker(
-            point: touristLocation.location,
-            child: const MyLocationMarker(role: UserType.ROLE_TOURIST));
-      }
+    for (final touristLocation in touristLocations) {
+      print(touristLocation.location);
+      markers.add(Marker(
+          point: touristLocation.location,
+          child: const MyLocationMarker(role: UserType.ROLE_TOURIST)));
     }
 
     return markers;
@@ -134,33 +131,37 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
 
   @override
   Widget build(BuildContext context) {
-    final markers = _buildMarkers();
-
     Widget mapWidget;
 
     if (_currentPosition != null) {
-      mapWidget = FlutterMap(
-        options: MapOptions(
-          minZoom: 10,
-          maxZoom: 50,
-          initialCenter: LatLng(
-            _currentPosition!.latitude,
-            _currentPosition!.longitude,
+      if (touristLocations != null) {
+        markers = _buildMarkers();
+
+        mapWidget = FlutterMap(
+          options: MapOptions(
+            minZoom: 10,
+            maxZoom: 50,
+            initialCenter: LatLng(
+              _currentPosition!.latitude,
+              _currentPosition!.longitude,
+            ),
+            initialZoom: 20,
           ),
-          initialZoom: 20,
-        ),
-        children: [
-          TileLayer(
-            urlTemplate: 'https://api.mapbox.com/styles/v1/'
-                '{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}',
-            additionalOptions: const {
-              'accessToken': MapBoxCredentials.MAP_BOX_TOKEN,
-              'id': MapBoxCredentials.MAPBOX_STYLE,
-            },
-          ),
-          MarkerLayer(markers: markers),
-        ],
-      );
+          children: [
+            TileLayer(
+              urlTemplate: 'https://api.mapbox.com/styles/v1/'
+                  '{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}',
+              additionalOptions: const {
+                'accessToken': MapBoxCredentials.MAP_BOX_TOKEN,
+                'id': MapBoxCredentials.MAPBOX_STYLE,
+              },
+            ),
+            MarkerLayer(markers: markers),
+          ],
+        );
+      } else {
+        mapWidget = const Center(child: CircularProgressIndicator());
+      }
     } else {
       mapWidget = const Center(child: CircularProgressIndicator());
     }
@@ -181,14 +182,15 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
                           child: Text('Error loading data'),
                         );
                       } else {
-                        final touristLocations = snapshot.data ?? [];
+                        final touristLocationss = snapshot.data ?? [];
+                        touristLocations = snapshot.data ?? [];
                         return SizedBox(
                           height: 153,
                           child: PageView.builder(
                             controller: _pageController,
-                            itemCount: touristLocations.length,
+                            itemCount: touristLocationss.length,
                             itemBuilder: (context, index) {
-                              final touristItem = touristLocations[index];
+                              final touristItem = touristLocationss[index];
                               return TouristItemDetail(
                                 touristItem: touristItem,
                                 guideLocation: LatLng(
