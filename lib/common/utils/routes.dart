@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:life_travel/common/utils/user_type.dart';
 import 'package:life_travel/iot_asset_management/presentation/animated_marker_map.dart';
 import 'package:life_travel/iot_asset_management/presentation/weather_iot.dart';
 import 'package:life_travel/tour_packages/presentation/tour_packages.dart';
@@ -23,16 +22,15 @@ class Routes extends StatelessWidget {
     if (role == 'ROLE_AGENCY') {
       routes = [
         const TourPackages(),
-        Notifications(),
         const AnimatedMarkerMap(),
-        UserProfile(),
+        const UserProfile(),
       ];
     } else if (role == 'ROLE_TOURIST') {
       routes = [
-        Weather(),
-        Notifications(),
+        const Weather(),
+        const Notifications(),
         const TourPackages(),
-        UserProfile(),
+        const UserProfile(),
       ];
     }
 
@@ -41,17 +39,5 @@ class Routes extends StatelessWidget {
     } else {
       return Container();
     }
-  }
-}
-
-class CalendarRoute extends StatelessWidget {
-  const CalendarRoute();
-
-  @override
-  Widget build(BuildContext context) {
-    // Implement your Calendar route UI here.
-    return Container(
-      child: Text("Calendar Route"),
-    );
   }
 }

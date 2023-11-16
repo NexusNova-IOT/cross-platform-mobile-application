@@ -23,8 +23,6 @@ class _BottomNavState extends State<BottomNav> {
       bottomNavBarItems = [
         const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         const BottomNavigationBarItem(
-            icon: Icon(Icons.notifications), label: 'Notifications'),
-        const BottomNavigationBarItem(
             icon: Icon(Icons.add_location), label: 'GPS'),
         const BottomNavigationBarItem(
             icon: Icon(Icons.person), label: 'Profile'),

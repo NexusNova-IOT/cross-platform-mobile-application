@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:life_travel/iot_asset_management/infraestructure/models/map_marker.dart';
+import 'package:life_travel/iot_asset_management/infraestructure/models/tourist_location_model.dart';
 
 class TouristItemDetail extends StatelessWidget {
   const TouristItemDetail(
       {super.key, required this.touristItem, required this.guideLocation});
 
-  final MapMarker touristItem;
+  final TouristLocationModel touristItem;
   final LatLng guideLocation;
 
   @override
@@ -35,29 +35,28 @@ class TouristItemDetail extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Text(
-                    touristItem.name,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    '${touristItem.getDistance(guideLocation)} meters away',
-                  ),
-                  const SizedBox(height: 10),
-                  arrowIcon,
-                ],
-              ),
+        child: ListTile(
+          leading: CircleAvatar(
+            radius: 30,
+            backgroundImage: NetworkImage(touristItem.imgUrl),
+          ),
+          title: Text(
+            touristItem.nombre,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
-          ],
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 5),
+              Text(
+                '${touristItem.getDistance(guideLocation)} meters away',
+              ),
+            ],
+          ),
+          trailing: arrowIcon,
         ),
       ),
     );

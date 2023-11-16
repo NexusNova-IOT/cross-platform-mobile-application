@@ -5,13 +5,12 @@ import '../../../../injections.dart';
 import '../../../domain/entities/iot_weather.dart';
 import '../../../presentation/weather_iot_detail/bloc/bloc.dart';
 
-
 class RecommendationSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<IotWeatherDetailBloc>(
-      create: (BuildContext context) =>
-      serviceLocator<IotWeatherDetailBloc>()..add(FetchIotWeatherDetailEvent()),
+      create: (BuildContext context) => serviceLocator<IotWeatherDetailBloc>()
+        ..add(FetchIotWeatherDetailEvent()),
       child: BlocBuilder<IotWeatherDetailBloc, IotWeatherDetailState>(
         builder: (BuildContext context, IotWeatherDetailState state) {
           if (state is IotWeatherDetailLoadedState) {

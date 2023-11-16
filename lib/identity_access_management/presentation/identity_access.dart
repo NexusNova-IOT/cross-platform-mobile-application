@@ -14,13 +14,11 @@ class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _isButtonEnabled = false;
   bool _isPasswordVisible = false;
   String? _errorMessage;
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color(0xFF161D2F),
       body: Center(
@@ -104,7 +102,6 @@ class _SignInScreenState extends State<SignInScreen> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             setState(() {
-                              _isButtonEnabled = true;
                               _errorMessage = null;
                             });
 

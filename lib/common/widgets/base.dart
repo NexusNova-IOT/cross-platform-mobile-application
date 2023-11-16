@@ -24,8 +24,6 @@ class _BaseState extends State<Base> {
   void initState() {
     super.initState();
     role = getUserRole();
-
-    print("ROL" + role.toString());
   }
 
   Future<String?> getUserRole() async {
@@ -39,7 +37,6 @@ class _BaseState extends State<Base> {
 
         if (userRole != null) {
           LocalStorage.sharedPreferences.setString('userRole', userRole!);
-          print(userRole);
           return userRole;
         }
       }
