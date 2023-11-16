@@ -4,16 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:life_travel/common/config/mapbox_credentials.dart';
 import 'package:life_travel/common/utils/user_type.dart';
 import 'package:life_travel/common/widgets/life_travel_app_bar.dart';
-import 'package:life_travel/iot_asset_management/infraestructure/data_sources/markers_sample.dart';
+import 'package:life_travel/iot_asset_management/infraestructure/data_sources/gps_data_provider.dart';
+import 'package:life_travel/iot_asset_management/infraestructure/models/tourist_location_model.dart';
+import 'package:life_travel/iot_asset_management/infraestructure/repositories/tourist_location_repository.dart';
 import 'package:life_travel/iot_asset_management/infraestructure/repositories/widgets/location_marker.dart';
 import 'package:life_travel/iot_asset_management/infraestructure/repositories/widgets/tourist_item_detail.dart';
-
-const MAP_BOX_TOKEN =
-    'pk.eyJ1IjoicnlhbnN3ZWRlbiIsImEiOiJjbDI0emlqZ2gwNG42M2lwZzdsM2k1N2w2In0.t8q9bDscpRha_4kXK1kdyg';
-
-const MAPBOX_STYLE = 'mapbox/dark-v11';
 
 class AnimatedMarkerMap extends StatefulWidget {
   const AnimatedMarkerMap({Key? key}) : super(key: key);
@@ -26,6 +24,13 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
   final _pageController = PageController(viewportFraction: 0.8);
   Position? _currentPosition;
   late Timer _positionUpdateTimer;
+  late Timer _touristPositionTimer;
+
+  late List<TouristLocationModel> touristLocations = [];
+  final TouristLocationRepositoryImpl touristLocationInterface =
+      TouristLocationRepositoryImpl(
+    gpsDataProvider: GpsDataProvider(),
+  );
 
   @override
   void initState() {
@@ -35,6 +40,21 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
     _positionUpdateTimer = Timer.periodic(const Duration(seconds: 10), (timer) {
       _getCurrentPosition();
     });
+
+    getLocations();
+
+    _touristPositionTimer =
+        Timer.periodic(const Duration(seconds: 10), (timer) {
+      getLocations();
+    });
+  }
+
+  void getLocations() async {
+    if (touristLocations.isEmpty) {
+      return;
+    }
+
+    touristLocations = await touristLocationInterface.getTouristLocations();
   }
 
   @override
@@ -100,12 +120,15 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
         ),
       );
     }
-    markers.addAll(touristSample.map((touristItem) {
-      return Marker(
-        point: touristItem.location,
-        child: const MyLocationMarker(role: UserType.ROLE_TOURIST),
-      );
-    }));
+
+    if (touristLocations.isNotEmpty) {
+      for (final touristLocation in touristLocations) {
+        Marker(
+            point: touristLocation.location,
+            child: const MyLocationMarker(role: UserType.ROLE_TOURIST));
+      }
+    }
+
     return markers;
   }
 
@@ -131,8 +154,8 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
             urlTemplate: 'https://api.mapbox.com/styles/v1/'
                 '{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}',
             additionalOptions: const {
-              'accessToken': MAP_BOX_TOKEN,
-              'id': MAPBOX_STYLE,
+              'accessToken': MapBoxCredentials.MAP_BOX_TOKEN,
+              'id': MapBoxCredentials.MAPBOX_STYLE,
             },
           ),
           MarkerLayer(markers: markers),
@@ -150,22 +173,34 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
                 mapWidget,
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    height: 153,
-                    child: PageView.builder(
-                      controller: _pageController,
-                      itemCount: touristSample.length,
-                      itemBuilder: (context, index) {
-                        final touristItem = touristSample[index];
-                        return TouristItemDetail(
-                          touristItem: touristItem,
-                          guideLocation: LatLng(
-                            _currentPosition!.latitude,
-                            _currentPosition!.longitude,
+                  child: FutureBuilder<List<TouristLocationModel>>(
+                    future: touristLocationInterface.getTouristLocations(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return const Center(
+                          child: Text('Error loading data'),
+                        );
+                      } else {
+                        final touristLocations = snapshot.data ?? [];
+                        return SizedBox(
+                          height: 153,
+                          child: PageView.builder(
+                            controller: _pageController,
+                            itemCount: touristLocations.length,
+                            itemBuilder: (context, index) {
+                              final touristItem = touristLocations[index];
+                              return TouristItemDetail(
+                                touristItem: touristItem,
+                                guideLocation: LatLng(
+                                  _currentPosition!.latitude,
+                                  _currentPosition!.longitude,
+                                ),
+                              );
+                            },
                           ),
                         );
-                      },
-                    ),
+                      }
+                    },
                   ),
                 ),
               ],

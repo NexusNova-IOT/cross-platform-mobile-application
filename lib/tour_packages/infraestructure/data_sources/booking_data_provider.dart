@@ -17,25 +17,19 @@ class BookingDataProvider {
     return token;
   }
 
-    Future<List<BookingModel>> getBookingsByTouristId(String id) async {
+  Future<List<BookingModel>> getBookingsByTouristId(String id) async {
     try {
       final bearerToken = await getBearerToken();
-      print("Ingresa");
       final response = await http.get(
         Uri.parse('${BookingApi.baseUrl}${BookingApi.bookings}/tourist/$id'),
         headers: {'Authorization': 'Bearer $bearerToken'},
       );
-      print("Sale");
-      print(response.body);
 
       if (response.statusCode == 200) {
-        // Use json.decode to parse the response body
         final List<dynamic> jsonData = json.decode(response.body);
 
-        // Map each JSON object to a BookingModel
-        final List<BookingModel> bookings = jsonData
-            .map((json) => BookingModel.fromJson(json))
-            .toList();
+        final List<BookingModel> bookings =
+            jsonData.map((json) => BookingModel.fromJson(json)).toList();
 
         return bookings;
       } else {
@@ -46,25 +40,20 @@ class BookingDataProvider {
       throw Exception('Failed to get bookings: $e');
     }
   }
+
   Future<List<BookingModel>> getBookingsByAgencyId(String id) async {
     try {
       final bearerToken = await getBearerToken();
-      print("Ingresa");
       final response = await http.get(
         Uri.parse('${BookingApi.baseUrl}${BookingApi.bookings}/agency/$id'),
         headers: {'Authorization': 'Bearer $bearerToken'},
       );
-      print("Sale");
-      print(response.body);
 
       if (response.statusCode == 200) {
-        // Use json.decode to parse the response body
         final List<dynamic> jsonData = json.decode(response.body);
 
-        // Map each JSON object to a BookingModel
-        final List<BookingModel> bookings = jsonData
-            .map((json) => BookingModel.fromJson(json))
-            .toList();
+        final List<BookingModel> bookings =
+            jsonData.map((json) => BookingModel.fromJson(json)).toList();
 
         return bookings;
       } else {
