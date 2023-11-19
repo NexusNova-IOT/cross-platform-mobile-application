@@ -33,6 +33,8 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
     gpsDataProvider: GpsDataProvider(),
   );
 
+  bool showNoDataBanner = false;
+
   @override
   void initState() {
     super.initState();
@@ -52,11 +54,22 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
   }
 
   void getLocations() async {
-    if (touristLocations.isEmpty) {
-      return;
-    }
+    try {
+      if (touristLocations.isEmpty) {
+        setState(() {
+          showNoDataBanner = true;
+        });
+        return;
+      }
 
-    touristLocations = await touristLocationInterface.getTouristLocations();
+      touristLocations = await touristLocationInterface.getTouristLocations();
+
+      setState(() {
+        showNoDataBanner = touristLocations.isEmpty;
+      });
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   @override
@@ -65,7 +78,7 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
     super.dispose();
   }
 
-  void resetPositions(){
+  void resetPositions() {
     markers = [];
   }
 
@@ -178,6 +191,20 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
           ? Stack(
               children: [
                 mapWidget,
+                if (showNoDataBanner)
+                  Positioned(
+                    bottom: 20,
+                    left: 20,
+                    right: 20,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      color: Colors.red,
+                      child: const Text(
+                        'No package is currently active!',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: FutureBuilder<List<TouristLocationModel>>(
@@ -185,7 +212,7 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return const Center(
-                          child: Text('Error loading data'),
+                          child: Text(''),
                         );
                       } else {
                         final touristLocationss = snapshot.data ?? [];
