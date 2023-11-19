@@ -5,7 +5,7 @@ class TourPackage extends Equatable {
     TourPackage({
         required this.id,
         required this.title,
-        required this.departmentName,
+        required this.destiny,
         required this.description,
         required this.imgUrl,
         required this.rating,
@@ -15,7 +15,7 @@ class TourPackage extends Equatable {
 
     final int id;
     final String title;
-    final String departmentName;
+    final String destiny;
     final String description;
     final String imgUrl;
     final double rating;
@@ -26,7 +26,7 @@ class TourPackage extends Equatable {
     List<Object> get props => <Object>[
         id,
         title,
-        departmentName,
+        destiny,
         description,
         imgUrl,
         rating,

@@ -13,6 +13,7 @@ class TourPackageFacadeService {
   }
 
   Future<TourPackage> getTourPackageById(int id) {
+    print("entro getTourPackageById" + id.toString());
     return tourPackageRepository.getPackageById(id);
   }
 }

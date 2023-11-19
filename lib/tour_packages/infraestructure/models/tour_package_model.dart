@@ -5,7 +5,7 @@ class TourPackageModel extends TourPackage {
   TourPackageModel({
     required int id,
     required String title,
-    required String departmentName,
+    required String destiny,
     required String description,
     required String imgUrl,
     required double rating,
@@ -14,7 +14,7 @@ class TourPackageModel extends TourPackage {
   }) : super(
           id: id,
           title: title,
-          departmentName: departmentName,
+          destiny: destiny,
           description: description,
           imgUrl: imgUrl,
           rating: rating,
@@ -26,7 +26,7 @@ class TourPackageModel extends TourPackage {
     return TourPackageModel(
       id: json['id'],
       title: json['title'],
-      departmentName: json['departmentName'],
+      destiny: json['destiny'],
       description: json['description'],
       imgUrl: json['imgUrl'],
       rating: json['rating'],
@@ -39,7 +39,7 @@ class TourPackageModel extends TourPackage {
     return {
       'id': id,
       'title': title,
-      'departmentName': departmentName,
+      'destiny': destiny,
       'description': description,
       'imgUrl': imgUrl,
       'rating': rating,

@@ -21,8 +21,11 @@ class TourPackageRepositoryImpl implements TourPackageRepository {
 
   @override
   Future<TourPackage> getPackageById(int id) async {
+    print("entro reporsitoryh");
     try {
+      print("entro reporsitoryh 1111111111");
       final TourPackage tourPackage = await dataProvider.getTourPackage(id);
+      print(tourPackage);
       return tourPackage;
     } catch (e) {
       throw Exception('Failed to get tour package with ID $id: $e');

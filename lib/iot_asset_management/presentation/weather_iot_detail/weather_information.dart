@@ -17,7 +17,7 @@ class WeatherWidget extends StatelessWidget {
             final IotWeather iotWeather = state.iotWeather;
 
             return Padding(
-              padding: EdgeInsets.only(left: 25, top: 16, bottom: 16),
+              padding: const EdgeInsets.only(left: 25, top: 16, bottom: 16),
               child: Row(
                 children: [
                   Image.asset(
@@ -25,18 +25,18 @@ class WeatherWidget extends StatelessWidget {
                     width: 80,
                     height: 80,
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Text(
                     '${iotWeather.temperature} °C',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Text(
                     '${iotWeather.humidity} %',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
@@ -48,7 +48,7 @@ class WeatherWidget extends StatelessWidget {
             // Maneja el caso de error
             return Text('Error: ${state.error}');
           } else {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
         },
       ),

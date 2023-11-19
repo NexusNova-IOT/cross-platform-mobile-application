@@ -104,7 +104,7 @@ class TourPackageDetail extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      tourPackage.departmentName,
+                                      tourPackage.destiny,
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: Colors.white,

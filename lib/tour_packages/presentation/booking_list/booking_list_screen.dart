@@ -16,9 +16,7 @@ class BookingListScreen extends StatelessWidget {
       child: BlocBuilder<BookingListBloc, BookingListState>(
         builder: (BuildContext context, BookingListState state) {
           if (state is BookingListLoadedState) {
-            final List<Booking> filteredBookings = state.bookings
-                .where((booking) => isFutureDate(booking.tourDate))
-                .toList();
+            final List<Booking> filteredBookings = state.bookings;
 
             if (filteredBookings.isEmpty) {
               return Center(

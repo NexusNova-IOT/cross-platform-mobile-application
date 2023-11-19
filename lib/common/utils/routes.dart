@@ -3,8 +3,6 @@ import 'package:life_travel/iot_asset_management/presentation/animated_marker_ma
 import 'package:life_travel/iot_asset_management/presentation/weather_iot.dart';
 import 'package:life_travel/tour_packages/presentation/tour_packages.dart';
 
-import '../../notifications/presentation/notifications.dart';
-
 import '../../profile_management/presentation/profile_management.dart';
 
 class Routes extends StatelessWidget {
@@ -27,7 +25,6 @@ class Routes extends StatelessWidget {
     } else if (role == 'ROLE_TOURIST') {
       routes = [
         const Weather(),
-        const Notifications(),
         const TourPackages(),
         const UserProfile(),
       ];

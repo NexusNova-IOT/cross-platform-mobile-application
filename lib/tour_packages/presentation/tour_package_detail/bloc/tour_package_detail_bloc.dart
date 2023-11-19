@@ -17,7 +17,9 @@ class TourPackageDetailBloc extends Bloc<TourPackageDetailEvent, TourPackageDeta
       Emitter<TourPackageDetailState> emit,
       ) async {
     try {
+      print("entro");
       final TourPackage tourPackage = await tourPackageService.getTourPackageById(event.tourPackageId);
+      print(tourPackage);
       emit(TourPackageDetailLoadedState(tourPackage));
     } catch (e) {
       emit(TourPackageDetailErrorState("Error fetching tour package: $e"));
