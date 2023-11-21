@@ -9,8 +9,8 @@ class WeatherWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<IotWeatherDetailBloc>(
-      create: (BuildContext context) =>
-      serviceLocator<IotWeatherDetailBloc>()..add(FetchIotWeatherDetailEvent()),
+      create: (BuildContext context) => serviceLocator<IotWeatherDetailBloc>()
+        ..add(FetchIotWeatherDetailEvent()),
       child: BlocBuilder<IotWeatherDetailBloc, IotWeatherDetailState>(
         builder: (BuildContext context, IotWeatherDetailState state) {
           if (state is IotWeatherDetailLoadedState) {
@@ -45,10 +45,33 @@ class WeatherWidget extends StatelessWidget {
               ),
             );
           } else if (state is IotWeatherDetailErrorState) {
-            // Maneja el caso de error
-            return Text('Error: ${state.error}');
+            return Card(
+              color: const Color(0xFF161D2F),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    "Can't show any weather information yet.",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            );
           } else {
-            return const CircularProgressIndicator();
+            return const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+              ],
+            );
           }
         },
       ),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -5,12 +7,38 @@ import '../../../../injections.dart';
 import '../../../domain/entities/iot_weather.dart';
 import '../../../presentation/weather_iot_detail/bloc/bloc.dart';
 
-class RecommendationSection extends StatelessWidget {
+class RecommendationSection extends StatefulWidget {
+  const RecommendationSection({Key? key}) : super(key: key);
+
+  @override
+  _RecommendationSectionState createState() => _RecommendationSectionState();
+}
+
+class _RecommendationSectionState extends State<RecommendationSection> {
+  late IotWeatherDetailBloc _iotWeatherDetailBloc;
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _iotWeatherDetailBloc = serviceLocator<IotWeatherDetailBloc>();
+
+    _timer = Timer.periodic(const Duration(seconds: 20), (timer) {
+      _iotWeatherDetailBloc.add(FetchIotWeatherDetailEvent());
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<IotWeatherDetailBloc>(
-      create: (BuildContext context) => serviceLocator<IotWeatherDetailBloc>()
-        ..add(FetchIotWeatherDetailEvent()),
+      create: (BuildContext context) =>
+          _iotWeatherDetailBloc..add(FetchIotWeatherDetailEvent()),
       child: BlocBuilder<IotWeatherDetailBloc, IotWeatherDetailState>(
         builder: (BuildContext context, IotWeatherDetailState state) {
           if (state is IotWeatherDetailLoadedState) {
@@ -34,8 +62,27 @@ class RecommendationSection extends StatelessWidget {
               ],
             );
           } else if (state is IotWeatherDetailErrorState) {
-            // Maneja el caso de error
-            return Text('Error: ${state.error}');
+            return Card(
+              color: const Color(0xFF161D2F),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center(
+                  child: Text(
+                    "You don't have any recommendations yet.",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            );
           } else {
             return const CircularProgressIndicator();
           }
@@ -82,7 +129,6 @@ class RecommendationSection extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            // Mostrar las recomendaciones dinámicamente
             for (String recommendation in recommendations)
               Text('• $recommendation'),
           ],

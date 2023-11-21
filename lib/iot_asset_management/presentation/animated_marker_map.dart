@@ -139,7 +139,6 @@ class _AnimatedMarkerMapState extends State<AnimatedMarkerMap> {
     }
 
     for (final touristLocation in touristLocations) {
-      print(touristLocation.location);
       markers.add(Marker(
           point: touristLocation.location,
           child: const MyLocationMarker(role: UserType.ROLE_TOURIST)));
