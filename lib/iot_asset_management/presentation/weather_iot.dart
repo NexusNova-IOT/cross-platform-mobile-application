@@ -18,12 +18,12 @@ class _WeatherState extends State<Weather> {
     return Scaffold(
       appBar: const LifeTravelAppBar(),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // Alinea los elementos a la izquierda
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 15.0),
           Container(
-            padding: EdgeInsets.only(left: 16.0), // Padding a la izquierda
-            child: Text(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: const Text(
               'Weather',
               style: TextStyle(
                 fontSize: 32,
@@ -33,8 +33,8 @@ class _WeatherState extends State<Weather> {
           ),
           WeatherWidget(),
           Container(
-            padding: EdgeInsets.only(left: 16.0), // Padding a la izquierda
-            child: Text(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: const Text(
               'Tour Information',
               style: TextStyle(
                 fontSize: 32,
@@ -44,8 +44,8 @@ class _WeatherState extends State<Weather> {
           ),
           TourItem(),
           Container(
-            padding: EdgeInsets.only(left: 16.0), // Padding a la izquierda
-            child: Text(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: const Text(
               'Recommendation',
               style: TextStyle(
                 fontSize: 32,

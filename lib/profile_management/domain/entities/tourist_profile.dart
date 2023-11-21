@@ -32,13 +32,13 @@ class TouristProfile extends Equatable {
 
   static Future<TouristProfile> fromJson(Map<String, dynamic> data) {
     return Future.value(TouristProfile(
-      id: data['id'],
-      name: data['name'],
-      birthDate: data['birthDate'],
-      phoneNumber: data['phoneNumber'],
-      touristPhotoUrl: data['touristPhotoUrl'],
-      email: data['email'],
-      emergencyPhoneNumber: data['emergencyPhoneNumber'],
+      id: data['id'] ?? '',
+      name: data['name'] ?? '',
+      birthDate: data['birthDate'] ?? '',
+      phoneNumber: data['phoneNumber'] ?? '',
+      touristPhotoUrl: data['touristPhotoUrl'] ?? '',
+      email: data['email'] ?? '',
+      emergencyPhoneNumber: data['emergencyPhoneNumber'] ?? '',
     ));
   }
 }

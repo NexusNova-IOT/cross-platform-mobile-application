@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:life_travel/identity_access_management/presentation/identity_access.dart';
 import 'package:life_travel/profile_management/infraestructure/repositories/widgets/profile_management.dart';
 import 'package:life_travel/profile_management/presentation/widgets/agency_profile_widget.dart';
 import 'package:life_travel/profile_management/presentation/widgets/tourist_profile_widget.dart';
@@ -51,6 +53,14 @@ class _UserProfileState extends State<UserProfile> {
     return null;
   }
 
+  void _logout() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('userId');
+    prefs.remove('userRole');
+
+    Navigator.pushReplacementNamed(context, '/login');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +70,24 @@ class _UserProfileState extends State<UserProfile> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignInScreen(),
+                      ),
+                    );
+                  } catch (e) {
+                    throw Exception("Error al cerrar sesión: $e");
+                  }
+                },
+                child: const Text('Logout'),
+              ),
+            );
           } else {
             final userProfile = snapshot.data;
 

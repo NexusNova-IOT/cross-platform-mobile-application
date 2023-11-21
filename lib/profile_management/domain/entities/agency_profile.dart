@@ -26,11 +26,11 @@ class AgencyProfile extends Equatable {
 
   static Future<AgencyProfile> fromJson(Map<String, dynamic> data) {
     return Future.value(AgencyProfile(
-      id: data['id'],
-      legalName: data['legalName'],
-      agencyPhotoUrl: data['agencyPhotoUrl'],
-      phoneNumber: data['phoneNumber'],
-      email: data['email'],
+      id: data['id'] ?? '',
+      legalName: data['legalName'] ?? '',
+      agencyPhotoUrl: data['agencyPhotoUrl'] ?? '',
+      phoneNumber: data['phoneNumber'] ?? '',
+      email: data['email'] ?? '',
     ));
   }
 }

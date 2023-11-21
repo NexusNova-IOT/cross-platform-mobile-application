@@ -3,24 +3,26 @@ import 'package:life_travel/iot_asset_management/presentation/tour_package_item/
 import 'package:bloc/bloc.dart';
 import '../../../../common/config/local_storage.dart';
 import '../../../../tour_packages/application/booking_facade_service.dart';
-import '../../../../tour_packages/application/tour_package_facade_service.dart';
 import '../../../../tour_packages/domain/entities/booking.dart';
-import '../../../../tour_packages/domain/entities/tour_package.dart';
 
-class TourPackageItemBloc extends Bloc<TourPackageItemEvent, TourPackageItemState> {
+class TourPackageItemBloc
+    extends Bloc<TourPackageItemEvent, TourPackageItemState> {
   final BookingFacadeService bookingService;
 
-  TourPackageItemBloc({required this.bookingService}) : super(InitialTourPackageItemState()) {
+  TourPackageItemBloc({required this.bookingService})
+      : super(InitialTourPackageItemState()) {
     on<FetchTourPackageItemEvent>(_mapFetchTourPackageItemEventToState);
   }
 
   void _mapFetchTourPackageItemEventToState(
-      FetchTourPackageItemEvent event,
-      Emitter<TourPackageItemState> emit,
-      ) async {
+    FetchTourPackageItemEvent event,
+    Emitter<TourPackageItemState> emit,
+  ) async {
     try {
-      final String touristId = LocalStorage.sharedPreferences.getString('userId') ?? "";
-      final List<Booking> bookings = await bookingService.getBookingByTouristId(touristId);
+      final String touristId =
+          LocalStorage.sharedPreferences.getString('userId') ?? "";
+      final List<Booking> bookings =
+          await bookingService.getBookingByTouristId(touristId);
       emit(TourPackageItemLoadedState(bookings));
     } catch (e) {
       emit(TourPackageItemErrorState("Error fetching booking list: $e"));
