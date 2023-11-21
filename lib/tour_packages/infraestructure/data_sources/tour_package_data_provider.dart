@@ -41,7 +41,6 @@ class TourPackageDataProvider {
 
   Future<TourPackageModel> getTourPackage(int id) async {
     try {
-      print("entro datasource");
       final bearerToken = await getBearerToken();
       final response = await http.get(
         Uri.parse(

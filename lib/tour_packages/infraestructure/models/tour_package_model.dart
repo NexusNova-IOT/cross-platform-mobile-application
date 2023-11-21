@@ -8,7 +8,6 @@ class TourPackageModel extends TourPackage {
     required String destiny,
     required String description,
     required String imgUrl,
-    required double rating,
     required double meetingPointLatitude,
     required double meetingPointLongitude,
   }) : super(
@@ -17,7 +16,6 @@ class TourPackageModel extends TourPackage {
           destiny: destiny,
           description: description,
           imgUrl: imgUrl,
-          rating: rating,
           meetingPointLatitude: meetingPointLatitude,
           meetingPointLongitude: meetingPointLongitude,
         );
@@ -29,7 +27,6 @@ class TourPackageModel extends TourPackage {
       destiny: json['destiny'],
       description: json['description'],
       imgUrl: json['imgUrl'],
-      rating: json['rating'],
       meetingPointLatitude: json['meetingPointLatitude'],
       meetingPointLongitude: json['meetingPointLongitude'],
     );
@@ -42,7 +39,6 @@ class TourPackageModel extends TourPackage {
       'destiny': destiny,
       'description': description,
       'imgUrl': imgUrl,
-      'rating': rating,
       'meetingPointLatitude': meetingPointLatitude,
       'meetingPointLongitude': meetingPointLongitude,
     };

@@ -1,40 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
-
-import '../../../common/config/mapbox_credentials.dart';
+import 'package:life_travel/tour_packages/infraestructure/data_sources/tourist_list_data_provider.dart';
 import '../../../common/widgets/life_travel_app_bar.dart';
 import '../../../injections.dart';
+import '../../../profile_management/domain/entities/tourist_profile.dart';
 import '../../domain/entities/tour_package.dart';
 import 'bloc/tour_package_detail_bloc.dart';
 import 'bloc/tour_package_detail_event.dart';
 import 'bloc/tour_package_detail_state.dart';
 import 'map.dart';
 
-class TourPackageDetail extends StatelessWidget {
+class TourPackageDetail extends StatefulWidget {
   final int tourPackageId;
 
-  TourPackageDetail({
+  const TourPackageDetail({
+    super.key,
     required this.tourPackageId,
   });
+
+  @override
+  State<TourPackageDetail> createState() => _TourPackageDetailState();
+}
+
+class _TourPackageDetailState extends State<TourPackageDetail> {
+  TourListDataProvider tourListDataProvider = TourListDataProvider();
+  // List<TouristProfile> touristList = [];
+  @override
+  void initState() {
+    // getTouristList();
+    super.initState();
+  }
+
+  // void getTouristList() async {
+  //   touristList = await tourListDataProvider.getTourList(widget.tourPackageId);
+  //   print("TouristListLenght: " + touristList.length.toString());
+  // }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<TourPackageDetailBloc>(
       create: (BuildContext context) => TourPackageDetailBloc(
         tourPackageService: serviceLocator(),
-      )..add(FetchTourPackageDetailEvent(tourPackageId: tourPackageId)),
+      )..add(FetchTourPackageDetailEvent(tourPackageId: widget.tourPackageId)),
       child: BlocBuilder<TourPackageDetailBloc, TourPackageDetailState>(
         builder: (BuildContext context, TourPackageDetailState state) {
           if (state is TourPackageDetailLoadedState) {
-            // Usa state.tourPackage para acceder al paquete turístico cargado
             final TourPackage tourPackage = state.tourPackage;
 
             return Scaffold(
               appBar: const LifeTravelAppBar(),
               body: SingleChildScrollView(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -72,31 +88,15 @@ class TourPackageDetail extends StatelessWidget {
                                   children: <Widget>[
                                     Text(
                                       tourPackage.title,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 30,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                       ),
                                     ),
-                                    Row(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.access_time,
-                                          color: Colors.white,
-                                        ),
-                                        SizedBox(width: 5),
-                                        Text(
-                                          'Rating: ${tourPackage.rating}',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 20),
-                                    Text(
-                                      'Departamento del Perú:',
+                                    const SizedBox(height: 20),
+                                    const Text(
+                                      'Departments of Peru:',
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -105,14 +105,14 @@ class TourPackageDetail extends StatelessWidget {
                                     ),
                                     Text(
                                       tourPackage.destiny,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         color: Colors.white,
                                       ),
                                     ),
-                                    SizedBox(height: 20),
-                                    Text(
-                                      'Descripción:',
+                                    const SizedBox(height: 20),
+                                    const Text(
+                                      'Description:',
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -121,13 +121,13 @@ class TourPackageDetail extends StatelessWidget {
                                     ),
                                     Text(
                                       tourPackage.description,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         color: Colors.white,
                                       ),
                                     ),
-                                    SizedBox(height: 20),
-                                    Text(
+                                    const SizedBox(height: 20),
+                                    const Text(
                                       'Meeting Point:',
                                       style: TextStyle(
                                         fontSize: 18,
@@ -135,13 +135,18 @@ class TourPackageDetail extends StatelessWidget {
                                         color: Colors.white,
                                       ),
                                     ),
-                                    Container(
-                                      height: 300, // Ajusta la altura del mapa según tus necesidades
-                                      child: MapA(
-                                        latitude: tourPackage.meetingPointLatitude,
-                                        longitude: tourPackage.meetingPointLongitude,
+                                    SizedBox(
+                                      height: 300,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: MapA(
+                                          latitude:
+                                              tourPackage.meetingPointLatitude,
+                                          longitude:
+                                              tourPackage.meetingPointLongitude,
+                                        ),
                                       ),
-                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -162,8 +167,8 @@ class TourPackageDetail extends StatelessWidget {
               ),
             );
           } else {
-            return Scaffold(
-              appBar: const LifeTravelAppBar(),
+            return const Scaffold(
+              appBar: LifeTravelAppBar(),
               body: Center(
                 child: CircularProgressIndicator(),
               ),

@@ -1,4 +1,3 @@
-
 import 'package:life_travel/tour_packages/domain/entities/tour_package.dart';
 
 import '../domain/interfaces/tour_package_interface.dart';
@@ -13,7 +12,6 @@ class TourPackageFacadeService {
   }
 
   Future<TourPackage> getTourPackageById(int id) {
-    print("entro getTourPackageById" + id.toString());
     return tourPackageRepository.getPackageById(id);
   }
 }

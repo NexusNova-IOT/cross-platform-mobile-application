@@ -12,18 +12,18 @@ class BookingListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<BookingListBloc>(
       create: (BuildContext context) =>
-      serviceLocator<BookingListBloc>()..add(FetchBookingListEvent()),
+          serviceLocator<BookingListBloc>()..add(FetchBookingListEvent()),
       child: BlocBuilder<BookingListBloc, BookingListState>(
         builder: (BuildContext context, BookingListState state) {
           if (state is BookingListLoadedState) {
             final List<Booking> filteredBookings = state.bookings;
 
             if (filteredBookings.isEmpty) {
-              return Center(
+              return const Center(
                 child: Card(
-                  color: const Color(0xFF161D2F),
+                  color: Color(0xFF161D2F),
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(16.0),
                     child: Text(
                       "There's no bookings to show.",
                       style: TextStyle(
@@ -35,7 +35,6 @@ class BookingListScreen extends StatelessWidget {
                 ),
               );
             }
-
 
             return ListView.builder(
               itemCount: filteredBookings.length,
@@ -55,7 +54,7 @@ class BookingListScreen extends StatelessWidget {
               child: Text('Error: ${state.error}'),
             );
           }
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         },
