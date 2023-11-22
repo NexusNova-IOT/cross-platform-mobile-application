@@ -82,10 +82,10 @@ class ItineraryItem extends StatelessWidget {
                 width: 120,
                 height: 120,
                 child: Center(
-                  child: Image.asset(
-                    'images/profile_image.png',
-                    width: 70,
-                    height: 70,
+                  child: Image.network(
+                    imgUrl,
+                    width: 250,
+                    height: 250,
                   ),
                 ),
               ),
