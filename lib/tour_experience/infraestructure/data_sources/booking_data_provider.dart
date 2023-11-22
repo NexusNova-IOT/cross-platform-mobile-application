@@ -1,25 +1,18 @@
 import 'dart:convert';
 
-import 'package:life_travel/tour_packages/api/booking_api.dart';
-import 'package:life_travel/tour_packages/infraestructure/models/booking_model.dart';
+import 'package:life_travel/tour_experience/api/booking_api.dart';
+import 'package:life_travel/tour_experience/infraestructure/model/booking_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../common/config/local_storage.dart';
+
 class BookingDataProvider {
-  Future<String> getBearerToken() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? token = prefs.getString('token');
-
-    if (token == null) {
-      throw Exception('No se encontró el token en SharedPreferences.');
-    }
-
-    return token;
-  }
+  LocalStorage localStorage = LocalStorage();
 
   Future<List<BookingModel>> getBookingsByTouristId(String id) async {
     try {
-      final bearerToken = await getBearerToken();
+      final bearerToken = await localStorage.getBearerToken();
       final response = await http.get(
         Uri.parse('${BookingApi.baseUrl}${BookingApi.bookings}/tourist/$id'),
         headers: {'Authorization': 'Bearer $bearerToken'},
@@ -43,7 +36,7 @@ class BookingDataProvider {
 
   Future<List<BookingModel>> getBookingsByAgencyId(String id) async {
     try {
-      final bearerToken = await getBearerToken();
+      final bearerToken = await localStorage.getBearerToken();
       final response = await http.get(
         Uri.parse('${BookingApi.baseUrl}${BookingApi.bookings}/agency/$id'),
         headers: {'Authorization': 'Bearer $bearerToken'},

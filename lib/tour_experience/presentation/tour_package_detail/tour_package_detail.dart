@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_travel/tour_packages/infraestructure/data_sources/tourist_list_data_provider.dart';
+import 'package:life_travel/tour_experience/infraestructure/data_sources/tourist_list_data_provider.dart';
 import '../../../common/widgets/life_travel_app_bar.dart';
 import '../../../injections.dart';
 import '../../../profile_management/domain/entities/tourist_profile.dart';

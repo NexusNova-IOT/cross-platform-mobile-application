@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:life_travel/tour_packages/domain/entities/tour_package.dart';
+import 'package:life_travel/tour_experience/domain/entities/tour_package.dart';
 
 abstract class TourPackageDetailState extends Equatable {
   const TourPackageDetailState();

@@ -1,4 +1,4 @@
-import 'package:life_travel/tour_packages/domain/entities/tour_package.dart';
+import 'package:life_travel/tour_experience/domain/entities/tour_package.dart';
 
 import '../domain/interfaces/tour_package_interface.dart';
 

@@ -8,7 +8,7 @@ import 'package:life_travel/common/config/mapbox_credentials.dart';
 import 'package:life_travel/common/utils/user_type.dart';
 import 'package:life_travel/common/widgets/life_travel_app_bar.dart';
 import 'package:life_travel/iot_asset_management/infraestructure/data_sources/gps_data_provider.dart';
-import 'package:life_travel/iot_asset_management/infraestructure/models/tourist_location_model.dart';
+import 'package:life_travel/iot_asset_management/infraestructure/model/tourist_location_model.dart';
 import 'package:life_travel/iot_asset_management/infraestructure/repositories/tourist_location_repository.dart';
 import 'package:life_travel/iot_asset_management/infraestructure/repositories/widgets/location_marker.dart';
 import 'package:life_travel/iot_asset_management/infraestructure/repositories/widgets/tourist_item_detail.dart';

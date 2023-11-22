@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:life_travel/iot_asset_management/presentation/animated_marker_map.dart';
 import 'package:life_travel/iot_asset_management/presentation/weather_iot.dart';
-import 'package:life_travel/tour_packages/presentation/tour_packages.dart';
+import 'package:life_travel/tour_experience/presentation/tour_packages.dart';
 
 import '../../profile_management/presentation/profile_management.dart';
 

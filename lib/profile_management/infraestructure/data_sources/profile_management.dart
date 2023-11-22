@@ -7,23 +7,14 @@ import 'package:life_travel/profile_management/domain/entities/tourist_profile.d
 import 'package:http/http.dart' as http;
 
 class ProfileManagementDataProvider {
-  Future<String?> getBearerToken() async {
-    final Object? token =
-        LocalStorage.sharedPreferences.get('token') as String?;
-
-    if (token == null) {
-      throw Exception('No token found');
-    }
-
-    return token as String;
-  }
+  LocalStorage localStorage = LocalStorage();
 
   Future<TouristProfile> getTouristProfileById(String id) async {
     try {
-      final String? token =
-          await LocalStorage.sharedPreferences.get('token') as String?;
+      final String token = await
+          localStorage.getBearerToken();
       if (token == null) {
-        throw Exception('No se pudo obtener el token');
+        throw Exception('Couldn´t get the token');
       }
 
       final String url = ProfileManagementApi.baseUrl +
@@ -40,7 +31,7 @@ class ProfileManagementDataProvider {
         return TouristProfile.fromJson(data);
       } else {
         throw Exception(
-            'Error en la llamada a la API: ${response.reasonPhrase}');
+            'Api call mistake: ${response.reasonPhrase}');
       }
     } catch (e) {
       throw Exception('Failed to get tourist profile with ID $id: $e');
@@ -49,9 +40,9 @@ class ProfileManagementDataProvider {
 
   Future<AgencyProfile> getAgencyProfileById(String id) async {
     try {
-      final String? token = await getBearerToken();
+      final String token = await localStorage.getBearerToken();
       if (token == null) {
-        throw Exception('No se pudo obtener el token');
+        throw Exception('Couldn´t get the token');
       }
 
       final String url = ProfileManagementApi.baseUrl +
@@ -67,7 +58,7 @@ class ProfileManagementDataProvider {
         return AgencyProfile.fromJson(data);
       } else {
         throw Exception(
-            'Error en la llamada a la API: ${response.reasonPhrase}');
+            'Api call mistake: ${response.reasonPhrase}');
       }
     } catch (e) {
       throw Exception('Failed to get agency profile with ID $id: $e');

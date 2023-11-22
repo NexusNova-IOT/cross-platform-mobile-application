@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../../injections.dart';
-import '../../../tour_packages/presentation/tour_package_detail/tour_package_detail.dart';
+import '../../../tour_experience/presentation/tour_package_detail/tour_package_detail.dart';
 import 'bloc/bloc.dart';
 
 class TourItem extends StatelessWidget {

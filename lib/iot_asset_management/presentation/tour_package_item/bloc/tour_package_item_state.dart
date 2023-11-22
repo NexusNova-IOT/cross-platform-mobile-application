@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../tour_packages/domain/entities/booking.dart';
-import '../../../../tour_packages/domain/entities/tour_package.dart';
+import '../../../../tour_experience/domain/entities/booking.dart';
+import '../../../../tour_experience/domain/entities/tour_package.dart';
 
 abstract class TourPackageItemState extends Equatable {
   const TourPackageItemState();

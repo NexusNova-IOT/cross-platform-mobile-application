@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:life_travel/tour_packages/presentation/tour_package_detail/bloc/tour_package_detail_event.dart';
-import 'package:life_travel/tour_packages/presentation/tour_package_detail/bloc/tour_package_detail_state.dart';
+import 'package:life_travel/tour_experience/presentation/tour_package_detail/bloc/tour_package_detail_event.dart';
+import 'package:life_travel/tour_experience/presentation/tour_package_detail/bloc/tour_package_detail_state.dart';
 
 import '../../../application/tour_package_facade_service.dart';
 import '../../../domain/entities/tour_package.dart';

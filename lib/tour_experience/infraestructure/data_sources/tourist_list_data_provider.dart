@@ -1,23 +1,17 @@
 import 'package:http/http.dart' as http;
 import 'package:life_travel/profile_management/domain/entities/tourist_profile.dart';
-import 'package:life_travel/tour_packages/api/booking_api.dart';
+import 'package:life_travel/tour_experience/api/booking_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../common/config/local_storage.dart';
+
 class TourListDataProvider {
-  Future<String> getBearerToken() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? token = prefs.getString('token');
 
-    if (token == null) {
-      throw Exception('No se encontró el token en SharedPreferences.');
-    }
-
-    return token;
-  }
+  LocalStorage localStorage = LocalStorage();
 
   Future<List<TouristProfile>> getTourList(int packageId) async {
     try {
-      final bearerToken = await getBearerToken();
+      final bearerToken = await localStorage.getBearerToken();
       final DateTime now = DateTime.now();
       final String url =
           "https://lifetravel-iot-api.azurewebsites.net/api/v1/package/$packageId/date/$now";

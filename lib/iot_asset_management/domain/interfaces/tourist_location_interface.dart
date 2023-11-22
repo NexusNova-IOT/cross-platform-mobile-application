@@ -1,5 +1,5 @@
-import 'package:life_travel/iot_asset_management/infraestructure/models/tourist_location_model.dart';
+import 'package:life_travel/iot_asset_management/infraestructure/model/tourist_location_model.dart';
 
-abstract class TouristLocationInterface {
+abstract class TouristLocationRepository {
   Future<List<TouristLocationModel>> getTouristLocations();
 }

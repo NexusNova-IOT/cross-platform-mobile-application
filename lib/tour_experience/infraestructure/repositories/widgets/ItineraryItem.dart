@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:life_travel/tour_packages/infraestructure/repositories/widgets/CustomRectangle.dart';
-import 'package:life_travel/tour_packages/presentation/tour_package_detail/tour_package_detail.dart';
+import 'package:life_travel/tour_experience/infraestructure/repositories/widgets/CustomRectangle.dart';
+import 'package:life_travel/tour_experience/presentation/tour_package_detail/tour_package_detail.dart';
 
 class ItineraryItem extends StatelessWidget {
   final String Title;
