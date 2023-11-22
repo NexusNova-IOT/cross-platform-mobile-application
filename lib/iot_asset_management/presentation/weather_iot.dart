@@ -17,44 +17,46 @@ class _WeatherState extends State<Weather> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const LifeTravelAppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 15.0),
-          Container(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: const Text(
-              'Weather',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 15.0),
+            Container(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: const Text(
+                'Weather',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          WeatherWidget(),
-          Container(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: const Text(
-              'Tour Information',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
+            WeatherWidget(),
+            Container(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: const Text(
+                'Tour Information',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          TourItem(),
-          Container(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: const Text(
-              'Recommendation',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
+            TourItem(),
+            Container(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: const Text(
+                'Recommendation',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          RecommendationSection(),
-        ],
+            const RecommendationSection(),
+          ],
+        ),
       ),
     );
   }

@@ -14,14 +14,13 @@ class WeatherWidget extends StatefulWidget {
 
 class _WeatherWidgetState extends State<WeatherWidget> {
   late Timer _timer;
-  final _refreshController = StreamController<void>();
 
   @override
   void initState() {
     super.initState();
-    // Inicia el timer y actualiza cada 10 segundos
-    _timer = Timer.periodic(Duration(seconds: 10), (_) {
-      _refreshController.add(null);
+    _timer = Timer.periodic(Duration(seconds: 10), (timer) {
+      BlocProvider.of<IotWeatherDetailBloc>(context)
+        ..add(FetchIotWeatherDetailEvent());
     });
   }
 
@@ -29,7 +28,8 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   Widget build(BuildContext context) {
     return BlocProvider<IotWeatherDetailBloc>(
       create: (BuildContext context) => serviceLocator<IotWeatherDetailBloc>()
-        ..add(FetchIotWeatherDetailEvent()),
+        ..add(
+            FetchIotWeatherDetailEvent()), // Agrega el evento al crear el bloc
       child: BlocBuilder<IotWeatherDetailBloc, IotWeatherDetailState>(
         builder: (BuildContext context, IotWeatherDetailState state) {
           if (state is IotWeatherDetailLoadedState) {
@@ -73,8 +73,8 @@ class _WeatherWidgetState extends State<WeatherWidget> {
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Center(
-                  child: const Text(
-                    "You don't have any recommendations yet.",
+                  child: Text(
+                    "Can't show any weather information yet.",
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -100,7 +100,6 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   @override
   void dispose() {
     _timer.cancel();
-    _refreshController.close();
     super.dispose();
   }
 }
