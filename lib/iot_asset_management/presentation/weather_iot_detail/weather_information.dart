@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -5,7 +7,24 @@ import '../../../injections.dart';
 import '../../domain/entities/iot_weather.dart';
 import 'bloc/bloc.dart';
 
-class WeatherWidget extends StatelessWidget {
+class WeatherWidget extends StatefulWidget {
+  @override
+  _WeatherWidgetState createState() => _WeatherWidgetState();
+}
+
+class _WeatherWidgetState extends State<WeatherWidget> {
+  late Timer _timer;
+  final _refreshController = StreamController<void>();
+
+  @override
+  void initState() {
+    super.initState();
+    // Inicia el timer y actualiza cada 10 segundos
+    _timer = Timer.periodic(Duration(seconds: 10), (_) {
+      _refreshController.add(null);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<IotWeatherDetailBloc>(
@@ -54,8 +73,8 @@ class WeatherWidget extends StatelessWidget {
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Center(
-                  child: Text(
-                    "Can't show any weather information yet.",
+                  child: const Text(
+                    "You don't have any recommendations yet.",
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -76,5 +95,12 @@ class WeatherWidget extends StatelessWidget {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    _refreshController.close();
+    super.dispose();
   }
 }
